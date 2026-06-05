@@ -1,0 +1,127 @@
+/* =========================
+Base reset / defaults
+========================= */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    line-height: 1.6;
+    background: #f7f7f8;
+    color: #222;
+    margin: 0;
+}
+
+/* =========================
+Layout
+========================= */
+header {
+    background: #ffffff;
+    border-bottom: 1px solid #e5e5e5;
+    padding: 1.5rem;
+    text-align: center;
+}
+
+main {
+    max-width: 1100px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+}
+
+footer {
+    margin-top: 3rem;
+    padding: 2rem;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* =========================
+Typography
+========================= */
+h1, h2, h3 {
+    margin-top: 0;
+    line-height: 1.2;
+}
+
+h1 { font-size: 2rem; }
+h2 { font-size: 1.4rem; }
+h3 { font-size: 1.1rem; }
+
+p {
+    margin: 0.5rem 0 1rem;
+}
+
+/* =========================
+Links
+========================= */
+a {
+    color: #0066cc;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* =========================
+Cards (for index page)
+========================= */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+}
+
+.card {
+    display: block;
+    background: #ffffff;
+    border: 1px solid #e5e5e5;
+    border-radius: 10px;
+    padding: 1.2rem;
+    transition: box-shadow 0.2s ease;
+}
+
+.card:hover {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+
+/* =========================
+    Visualisation container
+========================= */
+.viz-container {
+    background: #ffffff;
+    border: 1px solid #e5e5e5;
+    border-radius: 10px;
+    padding: 1rem;
+}
+
+/* iframe (if embedding plots) */
+.viz-frame {
+    width: 100%;
+    min-height: 80vh;
+    border: none;
+}    
+
+/* =========================
+Utility classes
+========================= */
+.center {
+    text-align: center;
+}
+
+.muted {
+    color: #777;
+}
+
+.small {
+    font-size: 0.85rem;
+}
