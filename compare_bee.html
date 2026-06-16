@@ -15,7 +15,7 @@ h1 { margin:0 0 12px 0; font-size:1.05rem; }
 .display {
 display:grid;
 gap:var(--gap);
-grid-template-columns: 1fr;
+grid-template-columns: repeat(2,1fr);
 margin-bottom:16px;
 }
 @media (max-width:900px) { .display { grid-template-columns: 1fr; } }
@@ -54,7 +54,7 @@ min-height:180px;
 .editors {
 display:grid;
 gap:var(--gap);
-grid-template-columns: 1fr;
+grid-template-columns: repeat(2,1fr);
 margin-top:8px;
 }
 @media (max-width:900px) { .editors { grid-template-columns: 1fr; } }
@@ -398,7 +398,7 @@ flex-wrap:wrap;
     </div>
     <textarea id="ta3" spellcheck="false" placeholder="Paste full HTML document for Version 3">
         <!--TEXT AREA 3-->
-            
+
         <!--END OF TEXT AREA 3-->
     </textarea>
 </div>
