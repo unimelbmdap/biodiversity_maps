@@ -1,4 +1,183 @@
+
 <!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8">
+  <title>Rakali Sightings in Melbourne</title>
+</head>
+
+<body style="margin:0; padding:0;">
+
+<div style="position: relative; width: 100vw; height: 100vh;">
+
+  <!-- Heading -->
+  <div style="
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 9999;
+      background: rgba(255,255,255,0.85);
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-family: Arial, sans-serif;
+  ">
+      <h1 style="margin:0; font-size:24px;">Rakali Sightings in Melbourne</h1>
+      <h2 style="margin:0; font-size:24px;">With consideration of the number of people nearby</h2>
+  </div>
+
+  <!-- Legend -->
+<div style="
+    position: absolute;
+    top: 90px;
+    right: 20px;
+    z-index: 9999;
+    background: rgba(255,255,255,0.9);
+    padding: 12px;
+    border-radius: 8px;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+">
+    <h2 style="margin:0 0 8px 0; font-size:15px;">
+        Density class
+    </h2>
+
+    
+    <div style="
+        display:flex;
+        align-items:center;
+        gap:8px;
+        margin-bottom:6px;
+    ">
+        <span style="
+            width:14px;
+            height:14px;
+            border-radius:50%;
+            background:rgb(152, 170, 113);
+            display:inline-block;
+            border:1px solid black;
+        "></span>
+
+        <span>Extremely high</span>
+    </div>
+    
+    <div style="
+        display:flex;
+        align-items:center;
+        gap:8px;
+        margin-bottom:6px;
+    ">
+        <span style="
+            width:14px;
+            height:14px;
+            border-radius:50%;
+            background:rgb(121, 156, 22);
+            display:inline-block;
+            border:1px solid black;
+        "></span>
+
+        <span>High</span>
+    </div>
+    
+    <div style="
+        display:flex;
+        align-items:center;
+        gap:8px;
+        margin-bottom:6px;
+    ">
+        <span style="
+            width:14px;
+            height:14px;
+            border-radius:50%;
+            background:rgb(117, 143, 54);
+            display:inline-block;
+            border:1px solid black;
+        "></span>
+
+        <span>Low</span>
+    </div>
+    
+    <div style="
+        display:flex;
+        align-items:center;
+        gap:8px;
+        margin-bottom:6px;
+    ">
+        <span style="
+            width:14px;
+            height:14px;
+            border-radius:50%;
+            background:rgb(189, 77, 51);
+            display:inline-block;
+            border:1px solid black;
+        "></span>
+
+        <span>Medium</span>
+    </div>
+    
+    <div style="
+        display:flex;
+        align-items:center;
+        gap:8px;
+        margin-bottom:6px;
+    ">
+        <span style="
+            width:14px;
+            height:14px;
+            border-radius:50%;
+            background:rgb(116, 85, 33);
+            display:inline-block;
+            border:1px solid black;
+        "></span>
+
+        <span>Very Low</span>
+    </div>
+    
+    <div style="
+        display:flex;
+        align-items:center;
+        gap:8px;
+        margin-bottom:6px;
+    ">
+        <span style="
+            width:14px;
+            height:14px;
+            border-radius:50%;
+            background:rgb(11, 66, 168);
+            display:inline-block;
+            border:1px solid black;
+        "></span>
+
+        <span>Very high</span>
+    </div>
+    
+
+</div>
+
+  <!-- Data note -->
+  <div style="
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      z-index: 9999;
+      background: rgba(255,255,255,0.9);
+      padding: 12px;
+      border-radius: 8px;
+      font-family: Arial, sans-serif;
+      font-size: 12px;
+      max-width: 260px;
+  ">
+      <strong>Data note:</strong><br>
+      Density classes are based on area-weighted population density
+      intersecting each buffer area.
+
+      <h3>Data Sources</h3>
+      <p>ALA, submissions, DSpark</p>
+  </div>
+
+  <!-- PyDeck map -->
+  <div style="position:absolute; inset:0; z-index:1;">
+      <!DOCTYPE html>
 <html>
   <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
@@ -217910,4 +218089,10 @@
     });
 
   </script>
+</html>
+  </div>
+
+</div>
+
+</body>
 </html>

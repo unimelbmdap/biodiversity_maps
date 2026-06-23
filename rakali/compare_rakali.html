@@ -131,7 +131,7 @@ flex-wrap:wrap;
 </head>
 <body>
 <div class="wrap">
-<h1>Comparing Bee base map options</h1>
+<h1>Comparing Rakali Map Options</h1>
 
 <div class="toolbar" role="toolbar" aria-label="layout and actions">
 <div>
@@ -184,11 +184,12 @@ html, body {
     height: 100%;
     margin: 0;
     padding: 0;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
   .full-width {
     box-sizing: border-box;
     width: 100%;
-    height: calc(100vh - 43px);
+    height: calc(100vh - 90px);
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -220,7 +221,7 @@ html, body {
     user-select: none;
   }
 .service1 {
-    display: none;
+    /* display: none; */
     width: 100%;
     height: 100%;
     box-sizing: border-box;
@@ -235,15 +236,15 @@ html, body {
     box-sizing: border-box;
 }
   .panel-header {
-    background: #000;
-    color: #fff;
+    background: #ABC1A7;
+    color: #444A40;
     padding: 1rem;
     text-align: center;
   }
-  .panel-header h1 {
+  .panel-header h1, h2 {
     margin: 0;
-    font-size: 1.25rem;
   }
+
   .panel-footer {
     position: fixed;
     bottom: 0;
@@ -251,9 +252,9 @@ html, body {
     right: 0;
     text-align: left;
     font-size: 0.8rem;
-    color: #fff;
+    background: #ABC1A7;
+    color: #444A40;
     padding: 0.1rem 1rem;
-    background: #000;
     z-index: 100;
     margin: 0;
     box-sizing: border-box;
@@ -307,66 +308,30 @@ html, body {
 <div class="full-width">
 
   <div id="rakali_points" class="service1">
-    <div class="panel-header" style="color: #ffd629">
+    <div class="panel-header">
       <h1>Rakali spotted around Greater Melbourne</h1>
       <h2>Sized by number of people in the area</h2>
       <div class="legend-row" aria-hidden="true">
-        <span style="width: 150px; height: 18px; display: inline-block"></span>
-        <span
-          style="
-            background: #ffbf00;
-            width: 60px;
-            height: 18px;
-            display: inline-block;
-          "
-        ></span>
-        <span
-          style="
-            background: #ffd629;
-            width: 60px;
-            height: 18px;
-            display: inline-block;
-          "
-        ></span>
-        <span
-          style="
-            background: #ffe05e;
-            width: 60px;
-            height: 18px;
-            display: inline-block;
-          "
-        ></span>
-        <span
-          style="
-            background: #ffea94;
-            width: 60px;
-            height: 18px;
-            display: inline-block;
-          "
-        ></span>
-        <span
-          style="
-            background: #fff5c9;
-            width: 60px;
-            height: 18px;
-            display: inline-block;
-          "
-        ></span>
+        <span style="width: 150px; height: 18px; display: inline-block;"></span>
+        <img src="https://unimelbmdap.github.io/biodiversity_maps/assets/rakali_green.png" alt="rakali icon with a green outline" style="width: 60px; height: 18px; object-fit: contain; display: inline-block;">
+        <img src="https://unimelbmdap.github.io/biodiversity_maps/assets/rakali_blue.png" alt="rakali icon with a blue outline" style="width: 60px; height: 18px; object-fit: contain; display: inline-block;">
+        <img src="https://unimelbmdap.github.io/biodiversity_maps/assets/rakali_pink.png" alt="rakali icon with a pink outline" style="width: 60px; height: 18px; object-fit: contain; display: inline-block;">
+        <img src="https://unimelbmdap.github.io/biodiversity_maps/assets/rakali_orange.png" alt="rakali icon with a orange outline" style="width: 60px; height: 18px; object-fit: contain; display: inline-block;">
+        <img src="https://unimelbmdap.github.io/biodiversity_maps/assets/rakali_red.png" alt="rakali icon with a red outline" style="width: 60px; height: 18px; object-fit: contain; display: inline-block;">
       </div>
-      <div class="legend-row" aria-hidden="true" style="margin-top: 0.25rem">
-        <span style="width: 150px; height: 18px; display: inline-block"
-          >Species Count</span
-        >
-        <span style="width: 60px; height: 18px; display: inline-block">5</span>
-        <span style="width: 60px; height: 18px; display: inline-block">4</span>
-        <span style="width: 60px; height: 18px; display: inline-block">3</span>
-        <span style="width: 60px; height: 18px; display: inline-block">2</span>
-        <span style="width: 60px; height: 18px; display: inline-block">1</span>
+
+      <div class="legend-row" aria-hidden="true" style="margin-top: 0.25rem; font-size: 0.8rem;">
+        <span style="width: 150px; height: 18px; display: inline-block">Density of People</span>
+        <span style="width: 60px; height: 18px; display: inline-block">Very low</span>
+        <span style="width: 60px; height: 18px; display: inline-block">Low</span>
+        <span style="width: 60px; height: 18px; display: inline-block">Medium</span>
+        <span style="width: 60px; height: 18px; display: inline-block">High</span>
+        <span style="width: 60px; height: 18px; display: inline-block">Very/Extremely High</span>
       </div>
     </div>
     <div class="iframe-wrap">
         <iframe
-        src="https://unimelbmdap.github.io/suburban_futures/rakali_circle_map.html"
+        src="https://unimelbmdap.github.io/biodiversity_maps/rakali/icon_map.html"
         loading="lazy"
         title="Rakali Points"
         ></iframe>
@@ -377,9 +342,12 @@ html, body {
   </div>
 </div>
   <div id="data_source" class="panel-footer" role="contentinfo">
-    <p>Data source: Atlas of Living Australia</br>Map: Dr Emily Fitzgerald, MDAP</p>
+    <p>Data note: Density classes are based on area-weighted population density intersecting each buffer area.<br>
+      Data source: Atlas of Living Australia; DSpark; Submissions</br>Map: Dr Emily Fitzgerald, MDAP</p>
   </div>
+
 <!--END TEXT AREA 1-->
+
 </textarea>
 </div>
 
@@ -393,7 +361,157 @@ html, body {
     </div>
     <textarea id="ta2" spellcheck="false" placeholder="Paste full HTML document for Version 2">
         <!--TEXT AREA 2-->
-        
+        <style>
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+  .full-width {
+    box-sizing: border-box;
+    width: 100%;
+    height: calc(100vh - 90px);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+  .tab-radio {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .button-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    background: #000;
+    padding: 0.5rem;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  .button-bar label {
+    background: #111;
+    color: #fff;
+    border: 1px solid #333;
+    padding: 0.5rem 0.75rem;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    user-select: none;
+  }
+.service1 {
+    /* display: none; */
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    flex: 1; 
+}
+
+.service1 iframe {
+    width: 100%;
+    height: 100%;
+    display: block;
+    border: 0;
+    box-sizing: border-box;
+}
+  .panel-header {
+    background: #ABC1A7;
+    color: #444A40;
+    padding: 1rem;
+    text-align: center;
+  }
+  .panel-header h1, h2 {
+    margin: 0;
+  }
+
+  .panel-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: left;
+    font-size: 0.8rem;
+    background: #ABC1A7;
+    color: #444A40;
+    padding: 0.1rem 1rem;
+    z-index: 100;
+    margin: 0;
+    box-sizing: border-box;
+}
+  .legend-row {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 0.5rem;
+    align-items: center;
+  } 
+/* wrapper for iframe + watermark */
+.iframe-wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* ensure iframe fills wrapper and stays behind the watermark */
+.iframe-wrap iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  position: relative;
+  z-index: 0;
+}
+
+/* watermark container in top-right; does not capture pointer events */
+.iframe-wrap .iframe-watermark {
+  position: absolute;
+  top: 12px;
+  right: 5px;
+  z-index: 20;
+  text-align: right;
+  pointer-events: none; /* allow map interaction to pass through */
+}
+
+/* large watermark — adjust width as desired; image already opaque */
+.iframe-wrap .iframe-watermark img {
+  display: inline-block; 
+  width: 20%;          
+  max-width: 100%; 
+  height: auto;
+  opacity: 1;       /* keep full opacity since image is already opaqued */
+}
+
+
+</style>
+<div class="full-width">
+
+  <div id="rakali_points" class="service1">
+    <div class="panel-header">
+      <h1>Rakali spotted around Greater Melbourne</h1>
+      <h2>Sized by number of people in the area</h2>
+
+    </div>
+    <div class="iframe-wrap">
+        <iframe
+        src="https://unimelbmdap.github.io/biodiversity_maps/rakali/rakali_circle_map.html"
+        loading="lazy"
+        title="Rakali Points"
+        ></iframe>
+        <span class="iframe-watermark" aria-hidden="true">
+            <img src="https://unimelbmdap.github.io/biodiversity_maps/assets/uom_logo_no_background.png" alt="University of Melbourne Logo">
+        </span>
+    </div>
+  </div>
+</div>
+  <div id="data_source" class="panel-footer" role="contentinfo">
+    <p>Data note: Density classes are based on area-weighted population density intersecting each buffer area.<br>
+      Data source: Atlas of Living Australia; DSpark; Submissions</br>Map: Dr Emily Fitzgerald, MDAP</p>
+  </div>
+
         <!-- END OF TEXT AREA 2 -->
     </textarea>
 </div>
@@ -408,6 +526,154 @@ html, body {
     </div>
     <textarea id="ta3" spellcheck="false" placeholder="Paste full HTML document for Version 3">
         <!--TEXT AREA 3-->
+<style>
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+  .full-width {
+    box-sizing: border-box;
+    width: 100%;
+    height: calc(100vh - 90px);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+  .tab-radio {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .button-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    background: #000;
+    padding: 0.5rem;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  .button-bar label {
+    background: #111;
+    color: #fff;
+    border: 1px solid #333;
+    padding: 0.5rem 0.75rem;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    user-select: none;
+  }
+.service1 {
+    /* display: none; */
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    flex: 1; 
+}
+
+.service1 iframe {
+    width: 100%;
+    height: 100%;
+    display: block;
+    border: 0;
+    box-sizing: border-box;
+}
+  .panel-header {
+    background: #ABC1A7;
+    color: #444A40;
+    padding: 1rem;
+    text-align: center;
+  }
+  .panel-header h1, h2 {
+    margin: 0;
+  }
+
+  .panel-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: left;
+    font-size: 0.8rem;
+    background: #ABC1A7;
+    color: #444A40;
+    padding: 0.1rem 1rem;
+    z-index: 100;
+    margin: 0;
+    box-sizing: border-box;
+}
+  .legend-row {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 0.5rem;
+    align-items: center;
+  } 
+/* wrapper for iframe + watermark */
+.iframe-wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* ensure iframe fills wrapper and stays behind the watermark */
+.iframe-wrap iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  position: relative;
+  z-index: 0;
+}
+
+/* watermark container in top-right; does not capture pointer events */
+.iframe-wrap .iframe-watermark {
+  position: absolute;
+  top: 12px;
+  right: 5px;
+  z-index: 20;
+  text-align: right;
+  pointer-events: none; /* allow map interaction to pass through */
+}
+
+/* large watermark — adjust width as desired; image already opaque */
+.iframe-wrap .iframe-watermark img {
+  display: inline-block; 
+  width: 20%;          
+  max-width: 100%; 
+  height: auto;
+  opacity: 1;       /* keep full opacity since image is already opaqued */
+}
+
+
+</style>
+<div class="full-width">
+
+  <div id="rakali_points" class="service1">
+    <div class="panel-header">
+      <h1>How Close Are You to a Rakali</h1>
+      <h2>average number of visitors to an area that includes places rakali have been spotted</h2>
+    </div>
+    <div class="iframe-wrap">
+        <iframe
+        src="https://unimelbmdap.github.io/biodiversity_maps/rakali/rakali_pop_density.html"
+        loading="lazy"
+        title="Rakali Pop Density"
+        ></iframe>
+        <span class="iframe-watermark" aria-hidden="true">
+            <img src="https://unimelbmdap.github.io/biodiversity_maps/assets/uom_logo_no_background.png" alt="University of Melbourne Logo">
+        </span>
+    </div>
+  </div>
+</div>
+  <div id="data_source" class="panel-footer" role="contentinfo">
+    <p>Data source: Atlas of Living Australia; DSpark; Submissions</br>Map: Dr Emily Fitzgerald, MDAP</p>
+  </div>
 
         <!--END OF TEXT AREA 3-->
     </textarea>
