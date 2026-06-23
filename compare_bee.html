@@ -20,7 +20,7 @@ margin-bottom:16px;
 }
 @media (max-width:900px) { .display { grid-template-columns: 1fr; } }
 
-.slot {
+/* .slot {
     border: 1px solid #e2e2e2;
     border-radius: 6px;
     overflow: hidden;
@@ -28,6 +28,25 @@ margin-bottom:16px;
     flex-direction: column;
     height: 100vh;
     background: #fff;
+} */
+
+/* keep the slot as a column and clip excess, but let iframe use remaining space */
+.slot {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;     /* keep full viewport slot if you want one-per-viewport */
+  overflow: hidden;  /* prevents the slot from growing beyond viewport */
+}
+
+/* make the iframe fill remaining space under .slot-head */
+.slot iframe {
+  flex: 1 1 auto;    /* grow to fill remaining vertical space */
+  height: auto;      /* do not force 100% which causes overflow */
+  min-height: 220px; /* keep your previous minimum */
+  width: 100%;
+  border: 0;
+  display: block;
+  box-sizing: border-box;
 }
 
 .slot-head {
@@ -41,14 +60,15 @@ font-weight:600;
 font-size:0.95rem;
 }
 
-.slot iframe {
+/* .slot iframe {
     width: 100%;
     height: 100%;  /* ← fill the slot container */
     border: 0;
     display: block;
     box-sizing: border-box;
-    min-height: 220px;
-}
+    flex: 1 1 auto;
+    /* min-height: 220px; */
+} */
 
 /* Editors area under display */
 .editors {
@@ -168,9 +188,10 @@ html, body {
   .full-width {
     box-sizing: border-box;
     width: 100%;
-    height: 100%;
+    height: calc(100vh - 43px);
     display: flex;
     flex-direction: column;
+    overflow: hidden;
 }
   .tab-radio {
     position: absolute;
@@ -223,15 +244,20 @@ html, body {
     margin: 0;
     font-size: 1.25rem;
   }
-.panel-footer {
+  .panel-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
     text-align: left;
-    margin-top: 0rem;
-    font-size: 0.6rem;
+    font-size: 0.8rem;
     color: #fff;
     padding: 0.1rem 1rem;
     background: #000;
-    flex-shrink: 0;
-  }
+    z-index: 100;
+    margin: 0;
+    box-sizing: border-box;
+}
   .legend-row {
     display: flex;
     justify-content: center;
@@ -293,16 +319,17 @@ html, body {
 .iframe-wrap .iframe-watermark {
   position: absolute;
   top: 12px;
-  right: 12px;
+  right: 5px;
   z-index: 20;
+  text-align: right;
   pointer-events: none; /* allow map interaction to pass through */
 }
 
 /* large watermark — adjust width as desired; image already opaque */
 .iframe-wrap .iframe-watermark img {
-  display: block;
-  width: 220px;     /* large size to start with */
-  max-width: 35vw;  /* responsive cap on small screens */
+  display: inline-block; 
+  width: 20%;          
+  max-width: 100%; 
   height: auto;
   opacity: 1;       /* keep full opacity since image is already opaqued */
 }
@@ -420,8 +447,8 @@ html, body {
         title="All bees map"
         ></iframe>
         <span class="iframe-watermark" aria-hidden="true">
-      <img src="biodiversity_maps/assets/test.png" alt="">
-    </span>
+            <img src="https://unimelbmdap.github.io/biodiversity_maps/assets/uom_logo_no_background.png" alt="University of Melbourne Logo">
+        </span>
     </div>
   </div>
   <div id="amegilla_asserta" class="service1">
@@ -447,11 +474,16 @@ html, body {
         <span>Blue-banded bees locations</span>
       </div>
     </div>
-    <iframe
-      src="https://unimelbmdap.github.io/biodiversity_maps/amegilla_asserta.html"
-      loading="lazy"
-      title="Blue-banded bee map"
-    ></iframe>
+    <div class="iframe-wrap">
+        <iframe
+        src="https://unimelbmdap.github.io/biodiversity_maps/amegilla_asserta.html"
+        loading="lazy"
+        title="Blue-banded bee map"
+        ></iframe>
+        <span class="iframe-watermark" aria-hidden="true">
+            <img src="https://unimelbmdap.github.io/biodiversity_maps/assets/uom_logo_no_background.png" alt="University of Melbourne Logo">
+        </span>
+    </div>
   </div>
   <div id="hylaeus_littleri" class="service1">
     <div class="panel-header" style="color: #ff2d3c">
@@ -476,11 +508,16 @@ html, body {
         <span>Masked bee locations</span>
       </div>
     </div>
-    <iframe
-      src="https://unimelbmdap.github.io/biodiversity_maps/hylaeus_littleri.html"
-      loading="lazy"
-      title="Masked bee map"
-    ></iframe>
+    <div class="iframe-wrap">
+        <iframe
+        src="https://unimelbmdap.github.io/biodiversity_maps/hylaeus_littleri.html"
+        loading="lazy"
+        title="Masked bee map"
+        ></iframe>
+        <span class="iframe-watermark" aria-hidden="true">
+            <img src="https://unimelbmdap.github.io/biodiversity_maps/assets/uom_logo_no_background.png" alt="University of Melbourne Logo">
+        </span>
+    </div>
   </div>
   <div id="lasioglossum_urbanum" class="service1">
     <div class="panel-header" style="color: #617156">
@@ -505,11 +542,16 @@ html, body {
         <span>Furrow bee / Sweat bee locations</span>
       </div>
     </div>
-    <iframe
-      src="https://unimelbmdap.github.io/biodiversity_maps/lasioglossum_urbanum.html"
-      loading="lazy"
-      title="Furrow bee map"
-    ></iframe>
+    <div class="iframe-wrap">
+        <iframe
+        src="https://unimelbmdap.github.io/biodiversity_maps/lasioglossum_urbanum.html"
+        loading="lazy"
+        title="Furrow bee map"
+        ></iframe>
+        <span class="iframe-watermark" aria-hidden="true">
+            <img src="https://unimelbmdap.github.io/biodiversity_maps/assets/uom_logo_no_background.png" alt="University of Melbourne Logo">
+        </span>
+    </div>
   </div>
   <div id="lipotriches_flavoviridis" class="service1">
     <div class="panel-header" style="color: #9fb825">
@@ -534,11 +576,16 @@ html, body {
         <span>Metallic green nomia bee locations</span>
       </div>
     </div>
-    <iframe
-      src="https://unimelbmdap.github.io/biodiversity_maps/lipotriches_flavoviridis.html"
-      loading="lazy"
-      title="Metallic green nomia bee map"
-    ></iframe>
+    <div class="iframe-wrap">
+        <iframe
+        src="https://unimelbmdap.github.io/biodiversity_maps/lipotriches_flavoviridis.html"
+        loading="lazy"
+        title="Metallic green nomia bee map"
+        ></iframe>
+        <span class="iframe-watermark" aria-hidden="true">
+            <img src="https://unimelbmdap.github.io/biodiversity_maps/assets/uom_logo_no_background.png" alt="University of Melbourne Logo">
+        </span>
+    </div>
   </div>
   <div id="megachile_apicata" class="service1">
     <div class="panel-header" style="color: #406d80">
@@ -563,16 +610,21 @@ html, body {
         <span>Leaf-cutter bee locations</span>
       </div>
     </div>
-    <iframe
-      src="https://unimelbmdap.github.io/biodiversity_maps/megachile_apicata.html"
-      loading="lazy"
-      title="Leaf-cutter bee map"
-    ></iframe>
+    <div class="iframe-wrap">
+        <iframe
+        src="https://unimelbmdap.github.io/biodiversity_maps/megachile_apicata.html"
+        loading="lazy"
+        title="Leaf-cutter bee map"
+        ></iframe>
+        <span class="iframe-watermark" aria-hidden="true">
+            <img src="https://unimelbmdap.github.io/biodiversity_maps/assets/uom_logo_no_background.png" alt="University of Melbourne Logo">
+        </span>
+    </div>
   </div>
+</div>
   <div id="data_source" class="panel-footer" role="contentinfo">
     <p>Data source: Dr Katherine Horsefall and Dr Julian Brown</br>Map: Dr Emily Fitzgerald, MDAP</p>
   </div>
-</div>
 <!--END TEXT AREA 1-->
 </textarea>
 </div>
