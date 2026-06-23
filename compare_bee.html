@@ -15,19 +15,19 @@ h1 { margin:0 0 12px 0; font-size:1.05rem; }
 .display {
 display:grid;
 gap:var(--gap);
-grid-template-columns: repeat(2,1fr);
+grid-template-columns: repeat(3,1fr);
 margin-bottom:16px;
 }
 @media (max-width:900px) { .display { grid-template-columns: 1fr; } }
 
 .slot {
-border:1px solid #e2e2e2;
-border-radius:6px;
-overflow:hidden;
-display:flex;
-flex-direction:column;
-min-height:220px;
-background:#fff;
+    border: 1px solid #e2e2e2;
+    border-radius: 6px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background: #fff;
 }
 
 .slot-head {
@@ -42,19 +42,19 @@ font-size:0.95rem;
 }
 
 .slot iframe {
-width:100%;
-height: 100vh; 
-border:0;
-display:block;
-box-sizing:border-box;
-min-height:180px;
+    width: 100%;
+    height: 100%;  /* ← fill the slot container */
+    border: 0;
+    display: block;
+    box-sizing: border-box;
+    min-height: 220px;
 }
 
 /* Editors area under display */
 .editors {
 display:grid;
 gap:var(--gap);
-grid-template-columns: repeat(2,1fr);
+grid-template-columns: repeat(3,1fr);
 margin-top:8px;
 }
 @media (max-width:900px) { .editors { grid-template-columns: 1fr; } }
@@ -155,30 +155,40 @@ flex-wrap:wrap;
         <button data-slot="1" class="clearBtn">Clear</button>
     </div>
     </div>
-    html
 
 
 <textarea id="ta1" spellcheck="false" placeholder="Paste full HTML document for Version 1 (<!doctype html> ... )">
 <!--TEXT AREA 1-->
-    <!doctype html>
-    <html lang="en">
-    <head>
-    <meta charset="utf-8" />
-    <title>Bee maps</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <style>
-    .full-width { box-sizing: border-box; width: 100%; }
-
-    .button-bar {
+<style>
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+  .full-width {
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+  .tab-radio {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .button-bar {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
     background: #000;
     padding: 0.5rem;
     align-items: center;
-    }
-
-    .button-bar button {
+    flex-shrink: 0;
+  }
+  .button-bar label {
     background: #111;
     color: #fff;
     border: 1px solid #333;
@@ -186,189 +196,383 @@ flex-wrap:wrap;
     cursor: pointer;
     border-radius: 4px;
     font-size: 0.95rem;
-    }
-
-    .service1 { display: none; width: 100%; box-sizing: border-box; }
-    .service1.active { display: block; }
-
-    .service1 iframe {
+    user-select: none;
+  }
+.service1 {
+    display: none;
     width: 100%;
-    height: 700px;
+    height: 100%;
+    box-sizing: border-box;
+    flex: 1; 
+}
+
+.service1 iframe {
+    width: 100%;
+    height: 100%;
     display: block;
     border: 0;
     box-sizing: border-box;
-    }
-
-    .panel-header {
+}
+  .panel-header {
     background: #000;
     color: #fff;
     padding: 1rem;
     text-align: center;
-    }
+  }
+  .panel-header h1 {
+    margin: 0;
+    font-size: 1.25rem;
+  }
+.panel-footer {
+    text-align: left;
+    margin-top: 0rem;
+    font-size: 0.6rem;
+    color: #fff;
+    padding: 0.1rem 1rem;
+    background: #000;
+    flex-shrink: 0;
+  }
+  .legend-row {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 0.5rem;
+    align-items: center;
+  } /* Native Bees is the default view (shows even if inputs are stripped). */
+  #all_bees {
+    display: block;
+  } /* Hide the default panel when another species is selected. */
+  #tab_amegilla_asserta:checked ~ #all_bees,
+  #tab_hylaeus_littleri:checked ~ #all_bees,
+  #tab_lasioglossum_urbanum:checked ~ #all_bees,
+  #tab_lipotriches_flavoviridis:checked ~ #all_bees,
+  #tab_megachile_apicata:checked ~ #all_bees {
+    display: none;
+  } /* Show the selected species panel. */
+  #tab_amegilla_asserta:checked ~ #amegilla_asserta,
+  #tab_hylaeus_littleri:checked ~ #hylaeus_littleri,
+  #tab_lasioglossum_urbanum:checked ~ #lasioglossum_urbanum,
+  #tab_lipotriches_flavoviridis:checked ~ #lipotriches_flavoviridis,
+  #tab_megachile_apicata:checked ~ #megachile_apicata {
+    display: block;
+  } /* Highlight the active tab's label. */
+  #tab_all_bees:checked ~ .button-bar label[for="tab_all_bees"],
+  #tab_amegilla_asserta:checked ~ .button-bar label[for="tab_amegilla_asserta"],
+  #tab_hylaeus_littleri:checked ~ .button-bar label[for="tab_hylaeus_littleri"],
+  #tab_lasioglossum_urbanum:checked
+    ~ .button-bar
+    label[for="tab_lasioglossum_urbanum"],
+  #tab_lipotriches_flavoviridis:checked
+    ~ .button-bar
+    label[for="tab_lipotriches_flavoviridis"],
+  #tab_megachile_apicata:checked
+    ~ .button-bar
+    label[for="tab_megachile_apicata"] {
+    background: #333;
+    border-color: #777;
+  }
+/* wrapper for iframe + watermark */
+.iframe-wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
 
-    .panel-header h1 { margin: 0; font-size: 1.25rem; }
+/* ensure iframe fills wrapper and stays behind the watermark */
+.iframe-wrap iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  position: relative;
+  z-index: 0;
+}
 
-    .legend-row { display:flex; justify-content:center; gap:8px; margin-top:0.5rem; align-items:center; }
-    </style>
-    </head>
-    <body>
-    <div class="full-width">
+/* watermark container in top-right; does not capture pointer events */
+.iframe-wrap .iframe-watermark {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 20;
+  pointer-events: none; /* allow map interaction to pass through */
+}
 
-    <div class="button-bar" role="tablist" aria-label="Bee species selector">
-    <button type="button" onclick="openService1('all_bees')">Native Bees</button>
-    <button type="button" onclick="openService1('amegilla_asserta')">Blue-Banded Bee</button>
-    <button type="button" onclick="openService1('hylaeus_littleri')">Masked Bee</button>
-    <button type="button" onclick="openService1('lasioglossum_urbanum')">Furrow Bee/Sweat Bee</button>
-    <button type="button" onclick="openService1('lipotriches_flavoviridis')">Metallic Green Nomia Bee</button>
-    <button type="button" onclick="openService1('megachile_apicata')">Leaf-Cutter Bee</button>
-    </div>
+/* large watermark — adjust width as desired; image already opaque */
+.iframe-wrap .iframe-watermark img {
+  display: block;
+  width: 220px;     /* large size to start with */
+  max-width: 35vw;  /* responsive cap on small screens */
+  height: auto;
+  opacity: 1;       /* keep full opacity since image is already opaqued */
+}
 
-    <div id="all_bees" class="service1 active">
-    <div class="panel-header" style="color:#FFD629;">
-    <h1>City of Melbourne: Where to Find Native Bees</h1>
-    <div class="legend-row" aria-hidden="true">
-        <span style="width:150px;height:18px;display:inline-block"></span>
-        <span style="background:#FFBF00;width:60px;height:18px;display:inline-block"></span>
-        <span style="background:#FFD629;width:60px;height:18px;display:inline-block"></span>
-        <span style="background:#FFE05E;width:60px;height:18px;display:inline-block"></span>
-        <span style="background:#FFEA94;width:60px;height:18px;display:inline-block"></span>
-        <span style="background:#FFF5C9;width:60px;height:18px;display:inline-block"></span>
-    </div>
-    <div class="legend-row" aria-hidden="true" style="margin-top:0.25rem;">
-        <span style="width:150px;height:18px;display:inline-block">Species Count</span>
-        <span style="width:60px;height:18px;display:inline-block">5</span>
-        <span style="width:60px;height:18px;display:inline-block">4</span>
-        <span style="width:60px;height:18px;display:inline-block">3</span>
-        <span style="width:60px;height:18px;display:inline-block">2</span>
-        <span style="width:60px;height:18px;display:inline-block">1</span>
-    </div>
-    </div>
-    <iframe data-src="https://unimelbmdap.github.io/biodiversity_maps/all_bees.html" src="about:blank" title="All bees map"></iframe>
-    </div>
 
-    <div id="amegilla_asserta" class="service1">
-    <div class="panel-header" style="color:#46C8F0;">
-    <h1>City of Melbourne: Where to Find Blue-Banded Bees</h1>
-    <div style="display:flex; justify-content:center; gap:8px; margin-top:0.5rem;">
-        <span style="width:20px;height:12px;background:#46C8F0;border:1px solid #999;display:inline-block"></span>
+</style>
+<div class="full-width">
+  <!-- Radio inputs must come BEFORE the panels for the CSS to work. -->
+  <input
+    type="radio"
+    name="beetab"
+    id="tab_all_bees"
+    class="tab-radio"
+    checked
+  />
+  <input
+    type="radio"
+    name="beetab"
+    id="tab_amegilla_asserta"
+    class="tab-radio"
+  />
+  <input
+    type="radio"
+    name="beetab"
+    id="tab_hylaeus_littleri"
+    class="tab-radio"
+  />
+  <input
+    type="radio"
+    name="beetab"
+    id="tab_lasioglossum_urbanum"
+    class="tab-radio"
+  />
+  <input
+    type="radio"
+    name="beetab"
+    id="tab_lipotriches_flavoviridis"
+    class="tab-radio"
+  />
+  <input
+    type="radio"
+    name="beetab"
+    id="tab_megachile_apicata"
+    class="tab-radio"
+  />
+  <div class="button-bar" role="tablist" aria-label="Bee species selector">
+    <label for="tab_all_bees">Native Bees</label>
+    <label for="tab_amegilla_asserta">Blue-Banded Bee</label>
+    <label for="tab_hylaeus_littleri">Masked Bee</label>
+    <label for="tab_lasioglossum_urbanum">Furrow Bee/Sweat Bee</label>
+    <label for="tab_lipotriches_flavoviridis">Metallic Green Nomia Bee</label>
+    <label for="tab_megachile_apicata">Leaf-Cutter Bee</label>
+  </div>
+  <div id="all_bees" class="service1">
+    <div class="panel-header" style="color: #ffd629">
+      <h1>City of Melbourne: Where to Find Native Bees</h1>
+      <div class="legend-row" aria-hidden="true">
+        <span style="width: 150px; height: 18px; display: inline-block"></span>
+        <span
+          style="
+            background: #ffbf00;
+            width: 60px;
+            height: 18px;
+            display: inline-block;
+          "
+        ></span>
+        <span
+          style="
+            background: #ffd629;
+            width: 60px;
+            height: 18px;
+            display: inline-block;
+          "
+        ></span>
+        <span
+          style="
+            background: #ffe05e;
+            width: 60px;
+            height: 18px;
+            display: inline-block;
+          "
+        ></span>
+        <span
+          style="
+            background: #ffea94;
+            width: 60px;
+            height: 18px;
+            display: inline-block;
+          "
+        ></span>
+        <span
+          style="
+            background: #fff5c9;
+            width: 60px;
+            height: 18px;
+            display: inline-block;
+          "
+        ></span>
+      </div>
+      <div class="legend-row" aria-hidden="true" style="margin-top: 0.25rem">
+        <span style="width: 150px; height: 18px; display: inline-block"
+          >Species Count</span
+        >
+        <span style="width: 60px; height: 18px; display: inline-block">5</span>
+        <span style="width: 60px; height: 18px; display: inline-block">4</span>
+        <span style="width: 60px; height: 18px; display: inline-block">3</span>
+        <span style="width: 60px; height: 18px; display: inline-block">2</span>
+        <span style="width: 60px; height: 18px; display: inline-block">1</span>
+      </div>
+    </div>
+    <div class="iframe-wrap">
+        <iframe
+        src="https://unimelbmdap.github.io/biodiversity_maps/all_bees.html"
+        loading="lazy"
+        title="All bees map"
+        ></iframe>
+        <span class="iframe-watermark" aria-hidden="true">
+      <img src="biodiversity_maps/assets/test.png" alt="">
+    </span>
+    </div>
+  </div>
+  <div id="amegilla_asserta" class="service1">
+    <div class="panel-header" style="color: #46c8f0">
+      <h1>City of Melbourne: Where to Find Blue-Banded Bees</h1>
+      <div
+        style="
+          display: flex;
+          justify-content: center;
+          gap: 8px;
+          margin-top: 0.5rem;
+        "
+      >
+        <span
+          style="
+            width: 20px;
+            height: 12px;
+            background: #46c8f0;
+            border: 1px solid #999;
+            display: inline-block;
+          "
+        ></span>
         <span>Blue-banded bees locations</span>
+      </div>
     </div>
-    </div>
-    <iframe data-src="https://unimelbmdap.github.io/biodiversity_maps/amegilla_asserta.html" src="about:blank" title="Blue-banded bee map"></iframe>
-    </div>
-
-    <div id="hylaeus_littleri" class="service1">
-    <div class="panel-header" style="color:#FF2D3C;">
-    <h1>City of Melbourne: Where to Find Masked Bees</h1>
-    <div style="display:flex; justify-content:center; gap:8px; margin-top:0.5rem;">
-        <span style="width:20px;height:12px;background:#FF2D3C;border:1px solid #999;display:inline-block"></span>
+    <iframe
+      src="https://unimelbmdap.github.io/biodiversity_maps/amegilla_asserta.html"
+      loading="lazy"
+      title="Blue-banded bee map"
+    ></iframe>
+  </div>
+  <div id="hylaeus_littleri" class="service1">
+    <div class="panel-header" style="color: #ff2d3c">
+      <h1>City of Melbourne: Where to Find Masked Bees</h1>
+      <div
+        style="
+          display: flex;
+          justify-content: center;
+          gap: 8px;
+          margin-top: 0.5rem;
+        "
+      >
+        <span
+          style="
+            width: 20px;
+            height: 12px;
+            background: #ff2d3c;
+            border: 1px solid #999;
+            display: inline-block;
+          "
+        ></span>
         <span>Masked bee locations</span>
+      </div>
     </div>
-    </div>
-    <iframe data-src="https://unimelbmdap.github.io/biodiversity_maps/hylaeus_littleri.html" src="about:blank" title="Masked bee map"></iframe>
-    </div>
-
-    <div id="lasioglossum_urbanum" class="service1">
-    <div class="panel-header" style="color:#617156;">
-    <h1>City of Melbourne: Where to Find Furrow Bees/Sweat Bees</h1>
-    <div style="display:flex; justify-content:center; gap:8px; margin-top:0.5rem;">
-        <span style="width:20px;height:12px;background:#617156;border:1px solid #999;display:inline-block"></span>
+    <iframe
+      src="https://unimelbmdap.github.io/biodiversity_maps/hylaeus_littleri.html"
+      loading="lazy"
+      title="Masked bee map"
+    ></iframe>
+  </div>
+  <div id="lasioglossum_urbanum" class="service1">
+    <div class="panel-header" style="color: #617156">
+      <h1>City of Melbourne: Where to Find Furrow Bees/Sweat Bees</h1>
+      <div
+        style="
+          display: flex;
+          justify-content: center;
+          gap: 8px;
+          margin-top: 0.5rem;
+        "
+      >
+        <span
+          style="
+            width: 20px;
+            height: 12px;
+            background: #617156;
+            border: 1px solid #999;
+            display: inline-block;
+          "
+        ></span>
         <span>Furrow bee / Sweat bee locations</span>
+      </div>
     </div>
-    </div>
-    <iframe data-src="https://unimelbmdap.github.io/biodiversity_maps/lasioglossum_urbanum.html" src="about:blank" title="Furrow bee map"></iframe>
-    </div>
-
-    <div id="lipotriches_flavoviridis" class="service1">
-    <div class="panel-header" style="color:#9FB825;">
-    <h1>City of Melbourne: Where to Find Metallic Green Nomia Bees</h1>
-    <div style="display:flex; justify-content:center; gap:8px; margin-top:0.5rem;">
-        <span style="width:20px;height:12px;background:#9FB825;border:1px solid #999;display:inline-block"></span>
+    <iframe
+      src="https://unimelbmdap.github.io/biodiversity_maps/lasioglossum_urbanum.html"
+      loading="lazy"
+      title="Furrow bee map"
+    ></iframe>
+  </div>
+  <div id="lipotriches_flavoviridis" class="service1">
+    <div class="panel-header" style="color: #9fb825">
+      <h1>City of Melbourne: Where to Find Metallic Green Nomia Bees</h1>
+      <div
+        style="
+          display: flex;
+          justify-content: center;
+          gap: 8px;
+          margin-top: 0.5rem;
+        "
+      >
+        <span
+          style="
+            width: 20px;
+            height: 12px;
+            background: #9fb825;
+            border: 1px solid #999;
+            display: inline-block;
+          "
+        ></span>
         <span>Metallic green nomia bee locations</span>
+      </div>
     </div>
-    </div>
-    <iframe data-src="https://unimelbmdap.github.io/biodiversity_maps/lipotriches_flavoviridis.html" src="about:blank" title="Metallic green nomia bee map"></iframe>
-    </div>
-
-    <div id="megachile_apicata" class="service1">
-    <div class="panel-header" style="color:#406D80;">
-    <h1>City of Melbourne: Where to Find Leaf-Cutter Bees</h1>
-    <div style="display:flex; justify-content:center; gap:8px; margin-top:0.5rem;">
-        <span style="width:20px;height:12px;background:#406D80;border:1px solid #999;display:inline-block"></span>
+    <iframe
+      src="https://unimelbmdap.github.io/biodiversity_maps/lipotriches_flavoviridis.html"
+      loading="lazy"
+      title="Metallic green nomia bee map"
+    ></iframe>
+  </div>
+  <div id="megachile_apicata" class="service1">
+    <div class="panel-header" style="color: #406d80">
+      <h1>City of Melbourne: Where to Find Leaf-Cutter Bees</h1>
+      <div
+        style="
+          display: flex;
+          justify-content: center;
+          gap: 8px;
+          margin-top: 0.5rem;
+        "
+      >
+        <span
+          style="
+            width: 20px;
+            height: 12px;
+            background: #406d80;
+            border: 1px solid #999;
+            display: inline-block;
+          "
+        ></span>
         <span>Leaf-cutter bee locations</span>
+      </div>
     </div>
-    </div>
-    <iframe data-src="https://unimelbmdap.github.io/biodiversity_maps/megachile_apicata.html" src="about:blank" title="Leaf-cutter bee map"></iframe>
-    </div>
-
-    </div>
-
-    <script>
-    function openService1(serviceName) {
-    var panels = document.getElementsByClassName('service1');
-    for (var i = 0; i < panels.length; i++) {
-    panels[i].classList.remove('active');
-    }
-    var el = document.getElementById(serviceName);
-    if (el) {
-    el.classList.add('active');
-    } else {
-    console.warn('No panel found for', serviceName);
-    }
-    }
-
-    // Lazy-load iframes: only load when panel becomes active
-    document.addEventListener('DOMContentLoaded', function () {
-    function loadIframeIfActive(panel) {
-    var iframe = panel.querySelector('iframe[data-src]');
-    if (iframe && panel.classList.contains('active')) {
-        if (iframe.src === 'about:blank' || !iframe.src) {
-        iframe.src = iframe.getAttribute('data-src');
-        }
-    }
-    }
-
-    // Load iframe for initially active panel
-    var activePanel = document.querySelector('.service1.active');
-    if (activePanel) loadIframeIfActive(activePanel);
-
-    // Watch for panel changes and load iframe when panel becomes active
-    var panels = document.querySelectorAll('.service1');
-    var observer = new MutationObserver(function (mutations) {
-    mutations.forEach(function (m) {
-        if (m.target.classList && m.target.classList.contains('service1')) {
-        loadIframeIfActive(m.target);
-        }
-    });
-    });
-
-    panels.forEach(function (panel) {
-    observer.observe(panel, { attributes: true, attributeFilter: ['class'] });
-    });
-    });
-
-    // Also load iframe when button is clicked
-    document.querySelectorAll('.button-bar button').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-    setTimeout(function () {
-        var activePanel = document.querySelector('.service1.active');
-        if (activePanel) {
-        var iframe = activePanel.querySelector('iframe[data-src]');
-        if (iframe && (iframe.src === 'about:blank' || !iframe.src)) {
-            iframe.src = iframe.getAttribute('data-src');
-        }
-        }
-    }, 50);
-    });
-    });
-
-    // Ensure initial visible panel
-    if (!document.querySelector('.service1.active')) {
-    openService1('all_bees');
-    }
-    </script>
-    </body>
-    </html>
+    <iframe
+      src="https://unimelbmdap.github.io/biodiversity_maps/megachile_apicata.html"
+      loading="lazy"
+      title="Leaf-cutter bee map"
+    ></iframe>
+  </div>
+  <div id="data_source" class="panel-footer" role="contentinfo">
+    <p>Data source: Dr Katherine Horsefall and Dr Julian Brown</br>Map: Dr Emily Fitzgerald, MDAP</p>
+  </div>
+</div>
 <!--END TEXT AREA 1-->
 </textarea>
 </div>
@@ -490,9 +694,39 @@ w.document.close();
 });
 
 var display = document.getElementById('display');
-document.getElementById('oneCol').addEventListener('click', function () { display.style.gridTemplateColumns = '1fr'; });
-document.getElementById('twoCol').addEventListener('click', function () { display.style.gridTemplateColumns = '1fr 1fr'; });
-document.getElementById('threeCol').addEventListener('click', function () { display.style.gridTemplateColumns = 'repeat(3,1fr)'; });
+
+document.getElementById('oneCol').addEventListener('click', function () {
+    display.style.gridTemplateColumns = '1fr';
+    document.querySelectorAll('.slot').forEach(function (slot, idx) {
+        slot.style.display = idx === 0 ? 'flex' : 'none';
+    });
+    document.querySelectorAll('.editor').forEach(function (editor, idx) {
+        editor.style.display = idx === 0 ? 'flex' : 'none';
+    });
+});
+
+document.getElementById('twoCol').addEventListener('click', function () {
+    display.style.gridTemplateColumns = '1fr 1fr';
+    document.querySelectorAll('.slot').forEach(function (slot, idx) {
+        slot.style.display = idx < 2 ? 'flex' : 'none';
+    });
+    document.querySelectorAll('.editor').forEach(function (editor, idx) {
+        editor.style.display = idx < 2 ? 'flex' : 'none';
+    });
+});
+
+document.getElementById('threeCol').addEventListener('click', function () {
+    display.style.gridTemplateColumns = 'repeat(3,1fr)';
+    document.querySelectorAll('.slot').forEach(function (slot) {
+        slot.style.display = 'flex';
+    });
+    document.querySelectorAll('.editor').forEach(function (editor) {
+        editor.style.display = 'flex';
+    });
+});
+
+var editors = document.querySelector('.editors');
+
 
 // ----- AUTO-LOAD ON OPEN (sequential) -----
 document.addEventListener('DOMContentLoaded', function () {
