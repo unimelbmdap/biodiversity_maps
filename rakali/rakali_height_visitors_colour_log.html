@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <title>pydeck</title>
+        <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v1.13.0/mapbox-gl.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
+    <script src='https://cdn.jsdelivr.net/npm/@deck.gl/jupyter-widget@~9.0.*/dist/index.js'></script>
+    <style>
+    body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+#deck-container {
+  width: 100vw;
+  height: 100vh;
+}
+
+#deck-container canvas {
+  z-index: 1;
+  background: none;
+}
+    </style>
+  </head>
+  <body>
+    <div id="deck-container">
+    </div>
+  </body>
+  <script>
+    const container = document.getElementById('deck-container');
+    const jsonInput = {
+  "initialViewState": {
+    "latitude": -37.9,
+    "longitude": 145.1,
+    "pitch": 80,
+    "zoom": 7.5
+  },
+  "layers": [
+    {
+      "@@type": "GeoJsonLayer",
+      "autoHighlight": true,
+      "data": "https://unimelbmdap.github.io/biodiversity_maps/rakali/rakali_visitors.geojson",
+      "extruded": true,
+      "filled": true,
+      "getElevation": "@@=properties.count_rakali * 500",
+      "getFillColor": "@@=properties.color_visitors_log_magma_r",
+      "getLineColor": [
+        255,
+        255,
+        255
+      ],
+      "id": "882cd40d-ec5d-4e8e-9e13-420bf3192afe",
+      "opacity": 0.6,
+      "pickable": true,
+      "stroked": true
+    }
+  ],
+  "mapProvider": "carto",
+  "mapStyle": "https://basemaps.cartocdn.com/gl/voyager-gl-style/style.json",
+  "views": [
+    {
+      "@@type": "MapView",
+      "controller": true
+    }
+  ]
+};
+    const tooltip = {'html': '<b>{sa1_name}</b><br/>Average visitor count: {people_count_string}<br/>Rakali reported sightings: {count_rakali}<br/>SA1 visitor density: {people_count_float}<br/>'};
+    const customLibraries = null;
+    const configuration = null;
+
+    const deckInstance = createDeck({
+                  container,
+      jsonInput,
+      tooltip,
+      customLibraries,
+      configuration
+    });
+
+  </script>
+</html>
