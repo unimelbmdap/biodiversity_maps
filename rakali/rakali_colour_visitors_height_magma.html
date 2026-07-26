@@ -33,10 +33,10 @@
     const container = document.getElementById('deck-container');
     const jsonInput = {
   "initialViewState": {
-    "latitude": -37.9,
+    "latitude": -38.5,
     "longitude": 145.1,
     "pitch": 80,
-    "zoom": 7.5
+    "zoom": 8
   },
   "layers": [
     {
@@ -52,11 +52,10 @@
         125,
         125
       ],
-      "id": "2061d010-9cdf-4272-b414-cc18073ac1e4",
+      "id": "7771c10b-a320-4340-b0fb-ae563827a291",
       "opacity": 0.6,
       "pickable": true,
-      "stroked": true,
-      "wireframe": false
+      "stroked": true
     }
   ],
   "mapProvider": "carto",
@@ -68,7 +67,7 @@
     }
   ]
 };
-    const tooltip = {'html': '<b>{sa1_name}</b><br/>Average visitor count: {people_count_string}<br/>Rakali reported sightings: {count_rakali}<br/>SA1 visitor density: {people_count_float}<br/>'};
+    const tooltip = {'html': '<b>{SA2_NAME_2021}-{SA1_CODE_2021}</b><br/>Average visitor count: {people_count_string}<br/>Rakali reported sightings: {count_rakali}<br/>SA1 visitor density: {density}<br/>'};
     const customLibraries = null;
     const configuration = null;
 
