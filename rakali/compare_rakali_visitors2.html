@@ -186,13 +186,21 @@ html, body {
     padding: 0;
     font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
-  .full-width {
-    box-sizing: border-box;
-    width: 100%;
+  .page-wrapper {
     height: calc(100vh - 50px);
     display: flex;
     flex-direction: column;
+    box-sizing: border-box;
     overflow: hidden;
+  }
+  .full-width {
+    box-sizing: border-box;
+    width: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    min-height: 0;
 }
   .tab-radio {
     position: absolute;
@@ -227,7 +235,7 @@ html, body {
     box-sizing: border-box;
     flex: 1; 
 }
-
+ 
 .service1 iframe {
     width: 100%;
     height: 100%;
@@ -244,20 +252,25 @@ html, body {
   .panel-header h1, h2 {
     margin: 0;
   }
-
+  .panel-header h1 {
+    font-size: 1.75rem;
+  }
+  .panel-header h2 {
+    font-size: 0.95rem;
+  }
+  .panel-header p {
+    font-size: 0.85rem;
+  }
+ 
   .panel-footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
     text-align: left;
     font-size: 0.8rem;
     background: #ABC1A7;
     color: #444A40;
     padding: 0.1rem 1rem;
-    z-index: 100;
     margin: 0;
     box-sizing: border-box;
+    flex-shrink: 0;
 }
   .legend-row {
     display: flex;
@@ -273,7 +286,7 @@ html, body {
   height: 100%;
   overflow: visible;
 }
-
+ 
 /* ensure iframe fills wrapper and stays behind the watermark */
 .iframe-wrap iframe {
   display: block;
@@ -283,7 +296,7 @@ html, body {
   position: relative;
   z-index: 0;
 }
-
+ 
 /* watermark container in top-right; does not capture pointer events */
 .iframe-wrap .iframe-watermark {
   position: absolute;
@@ -293,7 +306,7 @@ html, body {
   text-align: right;
   pointer-events: none; /* allow map interaction to pass through */
 }
-
+ 
 /* large watermark — adjust width as desired; image already opaque */
 .iframe-wrap .iframe-watermark img {
   display: inline-block; 
@@ -302,47 +315,55 @@ html, body {
   height: auto;
   opacity: 1;       /* keep full opacity since image is already opaqued */
 }
-
-
+ 
+ 
 </style>
+<div class="page-wrapper">
 <div class="full-width">
-
+ 
   <div id="rakali_points" class="service1">
-    <div class="panel-header">
-      <h1>How Close Are You to a Rakali</h1>
-      <h2>Colours indicate how many rakali have been reported in an SA1 area.</h2>
-      <h2>Height indicates the average number of visitors to an SA1 area.</h2>
-      <p>ABS Statistical Area 1s; Average number across 2025 where people have been in the area for up to 6 hours.</p>
-      <p>Hold down the command (pc) or option (mac) button while dragging the mouse to rotate the map.</p>
-
+<div class="panel-header">
+<h1>How close are you to a rakali? (Add in Rivers)</h1>
+<h2>Colours indicate number of rakali sightings, height indicates average number of daily visitors to SA1 area. </h2>
+<p>Hold down shift (pc) or command (mac) button while dragging your mouse to rotate the map.</p>
+ 
 <div class="legend-row" aria-hidden="true">
-    <span></span>
-    <div style="display: flex; flex-direction: column; gap: 8px;">
-        <div style="width: 200px; height: 20px; background: linear-gradient(to right, #ffffff, #DDBFC2, #78000D, ); border: 1px solid #999; border-radius: 3px; opacity: 0.6;"></div>
-        <span style="font-size: 0.9rem;">Rakali sightings: 0-16</span>
-    </div>    
+<span></span>
+<div style="display: flex; flex-direction: column; gap: 8px;">
+<div style="display: flex; justify-content: space-between; width: 200px; font-size: 0.8rem;">
+<span>0</span>
+<span>16</span>
 </div>
-
+<div style="width: 200px; height: 20px; background: linear-gradient(to right, #f0f921, #fdca26, #fb9f3a, #ed7953, #d8576b, #bd3786, #9c179e, #7201a8, #46039f, #0d0887, #000004); border: 1px solid #999; border-radius: 3px; opacity: 0.6;"></div>
+<span style="font-size: 0.9rem;">Rakali sightings</span>
+</div>
+</div>
+<div class="legend-row" aria-hidden="true">
+    <svg width="40" height="2" style="display: inline-block; margin-right: 8px;">
+        <line x1="0" y1="1" x2="40" y2="1" stroke="blue" stroke-width="2"/>
+    </svg>
+    <span style="font-size: 0.9rem;">Rivers</span>
+</div>
       <!-- <div class="legend-row" aria-hidden="true" style="margin-top: 0.25rem; font-size: 0.8rem;">
-        <span style="width: 150px; height: 18px; display: inline-block">Rakali sighting recorded</span>
-      </div> -->
-    </div>
-    <div class="iframe-wrap">
-        <iframe
-        src="https://unimelbmdap.github.io/biodiversity_maps/rakali/rakali_colour_visitors_height_sheoak.html"
+<span style="width: 150px; height: 18px; display: inline-block">Rakali sighting recorded</span>
+</div> -->
+</div>
+<div class="iframe-wrap">
+<iframe
+        src="https://unimelbmdap.github.io/biodiversity_maps/rakali/rakali_colour_visitors_height_magma_with_hydro_rivers.html"
         loading="lazy"
         title="Rakali Points"
-        ></iframe>
-        <span class="iframe-watermark" aria-hidden="true">
-            <img src="https://unimelbmdap.github.io/biodiversity_maps/assets/uom_logo_no_background.png" alt="University of Melbourne Logo">
-        </span>
-    </div>
-  </div>
+></iframe>
+<span class="iframe-watermark" aria-hidden="true">
+<img src="https://unimelbmdap.github.io/biodiversity_maps/assets/uom_logo_no_background.png" alt="University of Melbourne Logo">
+</span>
 </div>
-  <div id="data_source" class="panel-footer" role="contentinfo">
-      Data source: Atlas of Living Australia; Dspark</br>Map: Dr Emily Fitzgerald, MDAP</p>
-  </div>
-
+</div>
+</div>
+<div id="data_source" class="panel-footer" role="contentinfo">
+      Data source: Atlas of Living Australia; Dspark</br>Researchers: Dr Kylie Sonas and Dr Anna Edwards</br>Map: Dr Emily Fitzgerald, MDAP</p>
+</div>
+</div>
 <!--END TEXT AREA 1-->
 
 </textarea>
@@ -358,20 +379,28 @@ html, body {
     </div>
     <textarea id="ta2" spellcheck="false" placeholder="Paste full HTML document for Version 2">
         <!--TEXT AREA 2-->
-<style>
+        <style>
 html, body {
     height: 100%;
     margin: 0;
     padding: 0;
     font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
-  .full-width {
-    box-sizing: border-box;
-    width: 100%;
+  .page-wrapper {
     height: calc(100vh - 50px);
     display: flex;
     flex-direction: column;
+    box-sizing: border-box;
     overflow: hidden;
+  }
+  .full-width {
+    box-sizing: border-box;
+    width: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    min-height: 0;
 }
   .tab-radio {
     position: absolute;
@@ -406,7 +435,7 @@ html, body {
     box-sizing: border-box;
     flex: 1; 
 }
-
+ 
 .service1 iframe {
     width: 100%;
     height: 100%;
@@ -423,24 +452,29 @@ html, body {
   .panel-header h1, h2 {
     margin: 0;
   }
-
+  .panel-header h1 {
+    font-size: 1.75rem;
+  }
+  .panel-header h2 {
+    font-size: 0.95rem;
+  }
+  .panel-header p {
+    font-size: 0.85rem;
+  }
+ 
   .panel-footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
     text-align: left;
     font-size: 0.8rem;
     background: #ABC1A7;
     color: #444A40;
     padding: 0.1rem 1rem;
-    z-index: 100;
     margin: 0;
     box-sizing: border-box;
+    flex-shrink: 0;
 }
   .legend-row {
     display: flex;
-    justify-content: left;
+    justify-content: center;
     gap: 8px;
     margin-top: 0.5rem;
     align-items: center;
@@ -452,7 +486,7 @@ html, body {
   height: 100%;
   overflow: visible;
 }
-
+ 
 /* ensure iframe fills wrapper and stays behind the watermark */
 .iframe-wrap iframe {
   display: block;
@@ -462,7 +496,7 @@ html, body {
   position: relative;
   z-index: 0;
 }
-
+ 
 /* watermark container in top-right; does not capture pointer events */
 .iframe-wrap .iframe-watermark {
   position: absolute;
@@ -472,7 +506,7 @@ html, body {
   text-align: right;
   pointer-events: none; /* allow map interaction to pass through */
 }
-
+ 
 /* large watermark — adjust width as desired; image already opaque */
 .iframe-wrap .iframe-watermark img {
   display: inline-block; 
@@ -481,46 +515,50 @@ html, body {
   height: auto;
   opacity: 1;       /* keep full opacity since image is already opaqued */
 }
-
-
+ 
+ 
 </style>
+<div class="page-wrapper">
 <div class="full-width">
-
+ 
   <div id="rakali_points" class="service1">
-    <div class="panel-header">
-      <h1>How Close Are You to a Rakali</h1>
-      <h2>Colours indicate how many rakali have been reported in an SA1 area.</h2>
-      <h2>Height indicates the average number of visitors to an SA1 area.</h2>
-      <p>ABS Statistical Area 1s; Average number across 2025 where people have been in the area for up to 6 hours.</p>
-      <p>Hold down the command (pc) or option (mac) button while dragging the mouse to rotate the map.</p>
-
+<div class="panel-header">
+<h1>How close are you to a rakali? (no rakali white)</h1>
+<h2>Colours indicate number of rakali sightings, height indicates average number of daily visitors to SA1 area. </h2>
+<p>Hold down shift (pc) or command (mac) button while dragging your mouse to rotate the map.</p>
+ 
 <div class="legend-row" aria-hidden="true">
-    <span></span>
-    <div style="display: flex; flex-direction: column; gap: 8px;">
-        <div style="width: 200px; height: 20px; background: linear-gradient(to right, #f0f921, #fdca26, #fb9f3a, #ed7953, #d8576b, #bd3786, #9c179e, #7201a8, #46039f, #0d0887, #000004); border: 1px solid #999; border-radius: 3px; opacity: 0.6;"></div>
-        <span style="font-size: 0.9rem;">Rakali sightings: 0-16</span>
-    </div>
+<span></span>
+<div style="display: flex; flex-direction: column; gap: 8px;">
+<div style="display: flex; justify-content: space-between; width: 200px; font-size: 0.8rem;">
+<span>0</span>
+<span>16</span>
 </div>
-
+<div style="width: 200px; height: 20px; background: linear-gradient(to right, #ffffff, #f0f921, #fdca26, #fb9f3a, #ed7953, #d8576b, #bd3786, #9c179e, #7201a8, #46039f, #0d0887, #000004); border: 1px solid #999; border-radius: 3px; opacity: 0.6;"></div>
+<span style="font-size: 0.9rem;">Rakali sightings</span>
+</div>
+</div>
+ 
       <!-- <div class="legend-row" aria-hidden="true" style="margin-top: 0.25rem; font-size: 0.8rem;">
-        <span style="width: 150px; height: 18px; display: inline-block">Rakali sighting recorded</span>
-      </div> -->
-    </div>
-    <div class="iframe-wrap">
-        <iframe
-        src="https://unimelbmdap.github.io/biodiversity_maps/rakali/rakali_colour_visitors_height_magma.html"
+<span style="width: 150px; height: 18px; display: inline-block">Rakali sighting recorded</span>
+</div> -->
+</div>
+<div class="iframe-wrap">
+<iframe
+        src="https://unimelbmdap.github.io/biodiversity_maps/rakali/rakali_colour_visitors_height_white_magma.html"
         loading="lazy"
         title="Rakali Points"
-        ></iframe>
-        <span class="iframe-watermark" aria-hidden="true">
-            <img src="https://unimelbmdap.github.io/biodiversity_maps/assets/uom_logo_no_background.png" alt="University of Melbourne Logo">
-        </span>
-    </div>
-  </div>
+></iframe>
+<span class="iframe-watermark" aria-hidden="true">
+<img src="https://unimelbmdap.github.io/biodiversity_maps/assets/uom_logo_no_background.png" alt="University of Melbourne Logo">
+</span>
 </div>
-  <div id="data_source" class="panel-footer" role="contentinfo">
-      Data source: Atlas of Living Australia; Dspark</br>Map: Dr Emily Fitzgerald, MDAP</p>
-  </div>
+</div>
+</div>
+<div id="data_source" class="panel-footer" role="contentinfo">
+      Data source: Atlas of Living Australia; Dspark</br>Researchers: Dr Kylie Sonas and Dr Anna Edwards</br>Map: Dr Emily Fitzgerald, MDAP</p>
+</div>
+</div>
         <!-- END OF TEXT AREA 2 -->
     </textarea>
 </div>
@@ -542,13 +580,21 @@ html, body {
     padding: 0;
     font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
-  .full-width {
-    box-sizing: border-box;
-    width: 100%;
+  .page-wrapper {
     height: calc(100vh - 50px);
     display: flex;
     flex-direction: column;
+    box-sizing: border-box;
     overflow: hidden;
+  }
+  .full-width {
+    box-sizing: border-box;
+    width: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    min-height: 0;
 }
   .tab-radio {
     position: absolute;
@@ -583,7 +629,7 @@ html, body {
     box-sizing: border-box;
     flex: 1; 
 }
-
+ 
 .service1 iframe {
     width: 100%;
     height: 100%;
@@ -600,20 +646,25 @@ html, body {
   .panel-header h1, h2 {
     margin: 0;
   }
-
+  .panel-header h1 {
+    font-size: 1.75rem;
+  }
+  .panel-header h2 {
+    font-size: 0.95rem;
+  }
+  .panel-header p {
+    font-size: 0.85rem;
+  }
+ 
   .panel-footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
     text-align: left;
     font-size: 0.8rem;
     background: #ABC1A7;
     color: #444A40;
     padding: 0.1rem 1rem;
-    z-index: 100;
     margin: 0;
     box-sizing: border-box;
+    flex-shrink: 0;
 }
   .legend-row {
     display: flex;
@@ -629,7 +680,7 @@ html, body {
   height: 100%;
   overflow: visible;
 }
-
+ 
 /* ensure iframe fills wrapper and stays behind the watermark */
 .iframe-wrap iframe {
   display: block;
@@ -639,7 +690,7 @@ html, body {
   position: relative;
   z-index: 0;
 }
-
+ 
 /* watermark container in top-right; does not capture pointer events */
 .iframe-wrap .iframe-watermark {
   position: absolute;
@@ -649,7 +700,7 @@ html, body {
   text-align: right;
   pointer-events: none; /* allow map interaction to pass through */
 }
-
+ 
 /* large watermark — adjust width as desired; image already opaque */
 .iframe-wrap .iframe-watermark img {
   display: inline-block; 
@@ -658,47 +709,50 @@ html, body {
   height: auto;
   opacity: 1;       /* keep full opacity since image is already opaqued */
 }
-
-
+ 
+ 
 </style>
+<div class="page-wrapper">
 <div class="full-width">
-
+ 
   <div id="rakali_points" class="service1">
-    <div class="panel-header">
-      <h1>How Close Are You to a Rakali</h1>
-      <h2>Colours indicate how many rakali have been reported in an SA1 area.</h2>
-      <h2>Height indicates the average number of visitors to an SA1 area.</h2>
-      <p>ABS Statistical Area 1s; Average number across 2025 where people have been in the area for up to 6 hours.</p>
-      <p>Hold down the command (pc) or option (mac) button while dragging the mouse to rotate the map.</p>
-
+<div class="panel-header">
+<h1>How close are you to a rakali? (decrease opacity)</h1>
+<h2>Colours indicate number of rakali sightings, height indicates average number of daily visitors to SA1 area. </h2>
+<p>Hold down shift (pc) or command (mac) button while dragging your mouse to rotate the map.</p>
+ 
 <div class="legend-row" aria-hidden="true">
-    <span></span>
-    <div style="display: flex; flex-direction: column; gap: 8px;">
-        <div style="width: 200px; height: 20px; background: linear-gradient(to right, #f0f921, #fdca26, #fb9f3a, #ed7953, #d8576b, #bd3786, #9c179e, #7201a8, #46039f, #0d0887, #000004); border: 1px solid #999; border-radius: 3px; opacity: 0.6;"></div>
-        <span style="font-size: 0.9rem;">Rakali sightings: 0-16</span>
-    </div>
+<span></span>
+<div style="display: flex; flex-direction: column; gap: 8px;">
+<div style="display: flex; justify-content: space-between; width: 200px; font-size: 0.8rem;">
+<span>0</span>
+<span>16</span>
 </div>
-
+<div style="width: 200px; height: 20px; background: linear-gradient(to right, #f0f921, #fdca26, #fb9f3a, #ed7953, #d8576b, #bd3786, #9c179e, #7201a8, #46039f, #0d0887, #000004); border: 1px solid #999; border-radius: 3px; opacity: 0.3;"></div>
+<span style="font-size: 0.9rem;">Rakali sightings</span>
+</div>
+</div>
+ 
       <!-- <div class="legend-row" aria-hidden="true" style="margin-top: 0.25rem; font-size: 0.8rem;">
-        <span style="width: 150px; height: 18px; display: inline-block">Rakali sighting recorded</span>
-      </div> -->
-    </div>
-    <div class="iframe-wrap">
-        <iframe
-        src="https://unimelbmdap.github.io/biodiversity_maps/rakali/rakali_colour_visitors_height_magma_wireframed.html"
+<span style="width: 150px; height: 18px; display: inline-block">Rakali sighting recorded</span>
+</div> -->
+</div>
+<div class="iframe-wrap">
+<iframe
+        src="https://unimelbmdap.github.io/biodiversity_maps/rakali/rakali_colour_visitors_height_magma_low_opacity.html"
         loading="lazy"
         title="Rakali Points"
-        ></iframe>
-        <span class="iframe-watermark" aria-hidden="true">
-            <img src="https://unimelbmdap.github.io/biodiversity_maps/assets/uom_logo_no_background.png" alt="University of Melbourne Logo">
-        </span>
-    </div>
-  </div>
+></iframe>
+<span class="iframe-watermark" aria-hidden="true">
+<img src="https://unimelbmdap.github.io/biodiversity_maps/assets/uom_logo_no_background.png" alt="University of Melbourne Logo">
+</span>
 </div>
-  <div id="data_source" class="panel-footer" role="contentinfo">
-      Data source: Atlas of Living Australia; Dspark</br>Map: Dr Emily Fitzgerald, MDAP</p>
-  </div>
-
+</div>
+</div>
+<div id="data_source" class="panel-footer" role="contentinfo">
+      Data source: Atlas of Living Australia; Dspark</br>Researchers: Dr Kylie Sonas and Dr Anna Edwards</br>Map: Dr Emily Fitzgerald, MDAP</p>
+</div>
+</div>
         <!--END OF TEXT AREA 3-->
     </textarea>
 </div>
