@@ -11,7 +11,7 @@
     </map-head>
     <map-body>
         <map-extent units="OSMTILE" checked="checked">
-            <map-input name="z" type="zoom" value="18" min="14" max="18" ></map-input>
+            <map-input name="z" type="zoom" value="18" min="8" max="18" ></map-input>
             <map-input name="x" type="location" axis="column" units="tilematrix" min="236644" max="236672" ></map-input>
             <map-input name="y" type="location" axis="row" units="tilematrix" min="160894" max="160909" ></map-input>
             <map-link tref="./{z}/{x}/{y}.png" rel="tile" ></map-link>

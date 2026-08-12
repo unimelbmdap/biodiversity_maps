@@ -41,7 +41,7 @@
     ]
   },
   "properties":{
-    "datetime":"2026-08-12T04:51:29Z",
+    "datetime":"2026-08-12T05:14:39Z",
     "start_datetime":"0001-01-01T00:00:00.000Z",
     "end_datetime":"9999-12-31T23:59:59.999Z",
     "tiles:tile_matrix_sets":{
@@ -64,6 +64,84 @@
         "supportedCRS":"http://www.opengis.net/def/crs/EPSG/0/3857",
         "wellKnownScaleSet":"http://www.opengis.net/def/wkss/OGC/1.0/GoogleMapsCompatible",
         "tileMatrix":[
+          {
+            "type":"TileMatrixType",
+            "identifier":"8",
+            "scaleDenominator":2183915.0938621787,
+            "topLeftCorner":[
+              -20037508.342789244,
+              20037508.342789244
+            ],
+            "tileWidth":256,
+            "tileHeight":256,
+            "matrixWidth":256,
+            "matrixHeight":256
+          },
+          {
+            "type":"TileMatrixType",
+            "identifier":"9",
+            "scaleDenominator":1091957.5469310894,
+            "topLeftCorner":[
+              -20037508.342789244,
+              20037508.342789244
+            ],
+            "tileWidth":256,
+            "tileHeight":256,
+            "matrixWidth":512,
+            "matrixHeight":512
+          },
+          {
+            "type":"TileMatrixType",
+            "identifier":"10",
+            "scaleDenominator":545978.77346554468,
+            "topLeftCorner":[
+              -20037508.342789244,
+              20037508.342789244
+            ],
+            "tileWidth":256,
+            "tileHeight":256,
+            "matrixWidth":1024,
+            "matrixHeight":1024
+          },
+          {
+            "type":"TileMatrixType",
+            "identifier":"11",
+            "scaleDenominator":272989.38673277234,
+            "topLeftCorner":[
+              -20037508.342789244,
+              20037508.342789244
+            ],
+            "tileWidth":256,
+            "tileHeight":256,
+            "matrixWidth":2048,
+            "matrixHeight":2048
+          },
+          {
+            "type":"TileMatrixType",
+            "identifier":"12",
+            "scaleDenominator":136494.69336638617,
+            "topLeftCorner":[
+              -20037508.342789244,
+              20037508.342789244
+            ],
+            "tileWidth":256,
+            "tileHeight":256,
+            "matrixWidth":4096,
+            "matrixHeight":4096
+          },
+          {
+            "type":"TileMatrixType",
+            "identifier":"13",
+            "scaleDenominator":68247.346683193085,
+            "topLeftCorner":[
+              -20037508.342789244,
+              20037508.342789244
+            ],
+            "tileWidth":256,
+            "tileHeight":256,
+            "matrixWidth":8192,
+            "matrixHeight":8192
+          },
           {
             "type":"TileMatrixType",
             "identifier":"14",
@@ -136,6 +214,42 @@
       "GoogleMapsCompatible":{
         "url":"#GoogleMapsCompatible",
         "limits":{
+          "8":{
+            "min_tile_col":231,
+            "max_tile_col":231,
+            "min_tile_row":157,
+            "max_tile_row":157
+          },
+          "9":{
+            "min_tile_col":462,
+            "max_tile_col":462,
+            "min_tile_row":314,
+            "max_tile_row":314
+          },
+          "10":{
+            "min_tile_col":924,
+            "max_tile_col":924,
+            "min_tile_row":628,
+            "max_tile_row":628
+          },
+          "11":{
+            "min_tile_col":1848,
+            "max_tile_col":1849,
+            "min_tile_row":1256,
+            "max_tile_row":1257
+          },
+          "12":{
+            "min_tile_col":3697,
+            "max_tile_col":3698,
+            "min_tile_row":2513,
+            "max_tile_row":2514
+          },
+          "13":{
+            "min_tile_col":7395,
+            "max_tile_col":7396,
+            "min_tile_row":5027,
+            "max_tile_row":5028
+          },
           "14":{
             "min_tile_col":14790,
             "max_tile_col":14792,
