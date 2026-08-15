@@ -127,7 +127,20 @@
                 "#95A08E"
             ],
 
-            "circle-opacity": 0.8,
+            "circle-opacity": [
+                "case",
+
+                // Individual point
+                ["!=", ["get", "clustered"], true],
+                1,
+
+                // 51–100 trees
+                ["<=", ["get", "point_count"], 100],
+                0.8,
+
+                // >100 trees
+                0.5
+            ],
 
             "circle-radius": [
                 "case",
