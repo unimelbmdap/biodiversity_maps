@@ -24,25 +24,12 @@
             width: 100%;
             height: 100%;
         }
-
-        #zoom-display {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            z-index: 10;
-            background: white;
-            padding: 6px 10px;
-            border-radius: 4px;
-            font-family: sans-serif;
-            font-size: 14px;
-        }
     </style>
 </head>
 
 <body>
 
 <div id="map"></div>
-<div id="zoom-display"></div>
 
 <script
     src="https://unpkg.com/maplibre-gl@5.13.0/dist/maplibre-gl.js"
@@ -99,17 +86,6 @@
         }
     });
 
-    const zoomDisplay = document.getElementById("zoom-display");
-
-    function updateZoom() {
-        zoomDisplay.textContent =
-            `Zoom: ${map.getZoom().toFixed(2)}`;
-    }
-
-    map.on("zoom", updateZoom);
-    map.on("load", updateZoom);
-
-
     map.on("load", () => {
 
     // 1. Add PMTiles source
@@ -143,16 +119,12 @@
                 ["!=", ["get", "clustered"], true],
                 "#2C421D",
 
-                // 2–50 trees
-                ["<=", ["get", "point_count"], 50],
-                "#617156",
-
                 // 51–100 trees
                 ["<=", ["get", "point_count"], 100],
-                "#95A08E",
+                "#617156",
 
                 // >100 trees
-                "#CAD0C6"
+                "#95A08E"
             ],
 
             "circle-opacity": 0.8,
