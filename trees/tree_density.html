@@ -48,6 +48,18 @@
         protocol.tile
     );
 
+    const PMTILES_URL = new URL(
+        "./tree_points_v3.pmtiles",
+        window.location.href
+    ).href;
+
+    console.log("PMTiles URL:", PMTILES_URL);
+
+    maplibregl.addProtocol(
+        "pmtiles",
+        protocol.tile
+    );
+
     const map = new maplibregl.Map({
         container: "map",
 
@@ -86,12 +98,16 @@
         }
     });
 
+    map.on("error", (e) => {
+        console.error("MapLibre error:", e.error);
+    });
+
     map.on("load", () => {
 
     // 1. Add PMTiles source
     map.addSource("trees", {
         type: "vector",
-        url: "pmtiles://./tree_points_v3.pmtiles"
+        url: `pmtiles://${PMTILES_URL}`
     });
 
 
