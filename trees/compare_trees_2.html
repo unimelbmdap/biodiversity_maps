@@ -1,0 +1,863 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Compare — previews above, editors below (auto-load on open)</title>
+<style>
+:root { --gap:12px; }
+html,body { height:100%; margin:0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial; color:#111; background:#fff; }
+.wrap { padding:12px; box-sizing:border-box; max-width:1400px; margin:0 auto; }
+
+h1 { margin:0 0 12px 0; font-size:1.05rem; }
+
+/* Display area (previews) */
+.display {
+display:grid;
+gap:var(--gap);
+grid-template-columns: repeat(3,1fr);
+margin-bottom:16px;
+}
+@media (max-width:900px) { .display { grid-template-columns: 1fr; } }
+
+/* .slot {
+    border: 1px solid #e2e2e2;
+    border-radius: 6px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background: #fff;
+} */
+
+/* keep the slot as a column and clip excess, but let iframe use remaining space */
+.slot {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;     /* keep full viewport slot if you want one-per-viewport */
+    overflow: hidden;  /* prevents the slot from growing beyond viewport */
+}
+
+/* make the iframe fill remaining space under .slot-head */
+.slot iframe {
+    flex: 1 1 auto;    /* grow to fill remaining vertical space */
+    height: auto;      /* do not force 100% which causes overflow */
+    min-height: 220px; /* keep your previous minimum */
+    width: 100%;
+    border: 0;
+    display: block;
+    box-sizing: border-box;
+}
+
+.slot-head {
+    padding:8px 10px;
+    background:#fafafa;
+    border-bottom:1px solid #eee;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-weight:600;
+    font-size:0.95rem;
+}
+
+/* .slot iframe {
+    width: 100%;
+    height: 100%;  /* ← fill the slot container */
+    /* border: 0;
+    display: block;
+    box-sizing: border-box;
+    flex: 1 1 auto; */
+    /* min-height: 220px; */
+/* } */ */
+
+/* Editors area under display */
+.editors {
+    display:grid;
+    gap:var(--gap);
+    grid-template-columns: repeat(3,1fr);
+    margin-top:8px;
+}
+
+@media (max-width:900px) { .editors { grid-template-columns: 1fr; } }
+.editor {
+    border:1px solid #e9e9e9;
+    border-radius:6px;
+    padding:8px;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    background:#fff;
+}
+
+.editor .controls {
+    display:flex;
+    gap:6px;
+    align-items:center;
+    flex-wrap:wrap;
+}
+
+.editor textarea {
+    width:100%;
+    min-height:220px;
+    height:260px;
+    box-sizing:border-box;
+    font-family: monospace;
+    font-size:12px;
+    padding:8px;
+    border:1px solid #ddd;
+    border-radius:4px;
+    resize:vertical;
+    white-space:pre;
+}
+
+button {
+    padding:6px 10px;
+    border-radius:6px;
+    border:1px solid #ccc;
+    background:#fafafa;
+    cursor:pointer;
+}
+
+.toolbar {
+    display:flex;
+    gap:8px;
+    align-items:center;
+    margin-bottom:12px;
+    flex-wrap:wrap;
+}
+
+.note { font-size:0.9rem; color:#444; margin-top:10px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>Comparing Snake Map Options</h1>
+
+<div class="toolbar" role="toolbar" aria-label="layout and actions">
+<div>
+    <button id="oneCol" title="Single column">1 column</button>
+    <button id="twoCol" title="Two columns">2 columns</button>
+    <button id="threeCol" title="Three columns">3 columns</button>
+</div>
+
+<div style="margin-left:auto; display:flex; gap:8px; align-items:center;">
+    <button id="loadAll" title="Load all slots">Load all</button>
+    <button id="clearAll" title="Clear all slots">Clear all</button>
+    <button id="openInWindow" title="Open first non-empty slot in new window">Open focused slot</button>
+</div>
+</div>
+
+<!-- Display area: previews -->
+<div id="display" class="display" aria-live="polite">
+<div class="slot" data-slot="1">
+    <div class="slot-head">Version 1 Map<span id="label1" aria-hidden="true"></span></div>
+    <iframe id="iframe1" title="Version 1 preview"></iframe>
+</div>
+
+<div class="slot" data-slot="2">
+    <div class="slot-head">Version 2 Map<span id="label2" aria-hidden="true"></span></div>
+    <iframe id="iframe2" title="Version 2 preview"></iframe>
+</div>
+
+<div class="slot" data-slot="3">
+    <div class="slot-head">Version 3 Map<span id="label3" aria-hidden="true"></span></div>
+    <iframe id="iframe3" title="Version 3 preview"></iframe>
+</div>
+</div>
+
+<!-- Editors below (no file upload controls) -->
+<div class="editors">
+<div class="editor" aria-label="Editor for version 1">
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+    <strong>Version 1</strong>
+    <div class="controls">
+        <button data-slot="1" class="loadBtn">Load →</button>
+        <button data-slot="1" class="clearBtn">Clear</button>
+    </div>
+    </div>
+
+
+<textarea id="ta1" spellcheck="false" placeholder="Paste full HTML document for Version 1 (<!doctype html> ... )">
+<!--TEXT AREA 1-->
+<style>
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+.full-width {
+    box-sizing: border-box;
+    width: 100%;
+    height: calc(100vh - 90px);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+.tab-radio {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+}
+.button-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    background: #D6D6D6;
+    padding: 0.5rem;
+    align-items: center;
+    flex-shrink: 0;
+}
+.button-bar label {
+    background: #D6D6D6;
+    color: #fff;
+    border: 1px solid #333;
+    padding: 0.5rem 0.75rem;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    user-select: none;
+}
+.service1 {
+    /* display: none; */
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    flex: 1; 
+}
+
+.service1 iframe {
+    width: 100%;
+    height: 100%;
+    display: block;
+    border: 0;
+    box-sizing: border-box;
+}
+.panel-header {
+    background: #D6D6D6;
+    color: #444A40;
+    padding: 1rem;
+    text-align: center;
+}
+.panel-header h1, h2 {
+    margin: 0;
+}
+
+.panel-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: left;
+    font-size: 0.8rem;
+    background: #D6D6D6;
+    color: #444A40;
+    padding: 0.1rem 1rem;
+    z-index: 100;
+    margin: 0;
+    box-sizing: border-box;
+}
+.legend-row {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 0.5rem;
+    align-items: center;
+} 
+/* wrapper for iframe + watermark */
+.iframe-wrap {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+/* ensure iframe fills wrapper and stays behind the watermark */
+.iframe-wrap iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    position: relative;
+    z-index: 0;
+}
+
+/* watermark container in top-right; does not capture pointer events */
+.iframe-wrap .iframe-watermark {
+    position: absolute;
+    top: 12px;
+    right: 5px;
+    z-index: 20;
+    text-align: right;
+  pointer-events: none; /* allow map interaction to pass through */
+}
+
+/* large watermark — adjust width as desired; image already opaque */
+.iframe-wrap .iframe-watermark img {
+    display: inline-block; 
+    width: 20%;          
+    max-width: 100%; 
+    height: auto;
+  opacity: 1;       /* keep full opacity since image is already opaqued */
+}
+
+
+</style>
+<div class="full-width">
+    <div id="rakali_points" class="service1">
+        <div class="panel-header">
+        <h1>Historic Survey Map Areas and the Trees they included</h1>
+        <h2>light base map</h2>
+
+        <div class="legend" style="width: 400px; font-size: 0.75rem;">
+    <div style="margin-bottom: 4px;">Density of trees per hectare</div>
+
+    <div style="display: flex; height: 18px;">
+        <span style="flex: 1; background: rgb(202,208,198);"></span>
+        <span style="flex: 1; background: rgb(149,160,142);"></span>
+        <span style="flex: 1; background: rgb(97,113,86);"></span>
+        <span style="flex: 1; background: rgb(44,66,29);"></span>
+        <span style="flex: 1; background: rgb(68,74,64);"></span>
+    </div>
+
+    <div style="display: flex; justify-content: space-between; margin-top: 3px;">
+        <span>0.0</span>
+        <span>2.1</span>
+        <span>4.2</span>
+        <span>7.2</span>
+        <span>11.6</span>
+        <span>28.1</span>
+    </div>
+</div>
+    </div>
+
+        <div class="iframe-wrap">
+            <iframe
+            src="https://unimelbmdap.github.io/biodiversity_maps/trees/density_water_choropleth.html"
+            loading="lazy"
+            title="Historic Tree Map"
+            ></iframe>
+            <span class="iframe-watermark" aria-hidden="true">
+                <img src="https://unimelbmdap.github.io/biodiversity_maps/assets/uom_logo_no_background.png" alt="University of Melbourne Logo">
+            </span>
+        </div>
+    </div>
+</div>
+<div id="data_source" class="panel-footer" role="contentinfo">
+    <p>Data: details<br>
+Researchers: Prof Nick Williams and A/Prof Amy Ahas
+Map: Dr Emily Fitzgerald, Melbourne Data Analytics Platform (MDAP), Orignal RA name</p>
+</div>
+
+<!--END TEXT AREA 1-->
+
+</textarea>
+</div>
+
+<div class="editor" aria-label="Editor for version 2">
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+    <strong>Version 2</strong>
+    <div class="controls">
+        <button data-slot="2" class="loadBtn">Load →</button>
+        <button data-slot="2" class="clearBtn">Clear</button>
+    </div>
+    </div>
+    <textarea id="ta2" spellcheck="false" placeholder="Paste full HTML document for Version 2">
+        <!--TEXT AREA 2-->
+<style>
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+.full-width {
+    box-sizing: border-box;
+    width: 100%;
+    height: calc(100vh - 90px);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+.tab-radio {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+}
+.button-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    background: #D6D6D6;
+    padding: 0.5rem;
+    align-items: center;
+    flex-shrink: 0;
+}
+.button-bar label {
+    background: #D6D6D6;
+    color: #fff;
+    border: 1px solid #333;
+    padding: 0.5rem 0.75rem;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    user-select: none;
+}
+.service1 {
+    /* display: none; */
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    flex: 1; 
+}
+
+.service1 iframe {
+    width: 100%;
+    height: 100%;
+    display: block;
+    border: 0;
+    box-sizing: border-box;
+}
+.panel-header {
+    background: #D6D6D6;
+    color: #444A40;
+    padding: 1rem;
+    text-align: center;
+}
+.panel-header h1, h2 {
+    margin: 0;
+}
+
+.panel-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: left;
+    font-size: 0.8rem;
+    background: #D6D6D6;
+    color: #444A40;
+    padding: 0.1rem 1rem;
+    z-index: 100;
+    margin: 0;
+    box-sizing: border-box;
+}
+.legend-row {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 0.5rem;
+    align-items: center;
+} 
+/* wrapper for iframe + watermark */
+.iframe-wrap {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+/* ensure iframe fills wrapper and stays behind the watermark */
+.iframe-wrap iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    position: relative;
+    z-index: 0;
+}
+
+/* watermark container in top-right; does not capture pointer events */
+.iframe-wrap .iframe-watermark {
+    position: absolute;
+    top: 12px;
+    right: 5px;
+    z-index: 20;
+    text-align: right;
+  pointer-events: none; /* allow map interaction to pass through */
+}
+
+/* large watermark — adjust width as desired; image already opaque */
+.iframe-wrap .iframe-watermark img {
+    display: inline-block; 
+    width: 20%;          
+    max-width: 100%; 
+    height: auto;
+  opacity: 1;       /* keep full opacity since image is already opaqued */
+}
+
+
+</style>
+<div class="full-width">
+    <div id="rakali_points" class="service1">
+        <div class="panel-header">
+        <h1>Historic Survey Map Areas and the Trees they included</h1>
+        <h2>road base map</h2>
+
+        <div class="legend" style="width: 400px; font-size: 0.75rem;">
+    <div style="margin-bottom: 4px;">Density of trees per hectare</div>
+
+    <div style="display: flex; height: 18px;">
+        <span style="flex: 1; background: rgb(149,160,142);"></span>
+        <span style="flex: 1; background: rgb(97,113,86);"></span>
+        <span style="flex: 1; background: rgb(44,66,29);"></span>
+        <span style="flex: 1; background: rgb(68,74,64);"></span>
+    </div>
+
+    <div style="display: flex; justify-content: space-between; margin-top: 3px;">
+        <span>0.0</span>
+        <span>0.2</span>
+        <span>1.1</span>
+        <span>5.5</span>
+        <span>28.1</span>
+    </div>
+</div>
+    </div>
+
+        <div class="iframe-wrap">
+            <iframe
+            src="https://unimelbmdap.github.io/biodiversity_maps/trees/density_water_log4.html"
+            loading="lazy"
+            title="Historic Tree Map"
+            ></iframe>
+            <span class="iframe-watermark" aria-hidden="true">
+                <img src="https://unimelbmdap.github.io/biodiversity_maps/assets/uom_logo_no_background.png" alt="University of Melbourne Logo">
+            </span>
+        </div>
+    </div>
+</div>
+<div id="data_source" class="panel-footer" role="contentinfo">
+    <p>Data: details<br>
+Researchers: Prof Nick Williams and A/Prof Amy Ahas
+Map: Dr Emily Fitzgerald, Melbourne Data Analytics Platform (MDAP), Orignal RA name</p>
+</div>
+
+        <!-- END OF TEXT AREA 2 -->
+    </textarea>
+</div>
+
+<div class="editor" aria-label="Editor for version 3">
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+    <strong>Version 3</strong>
+    <div class="controls">
+        <button data-slot="3" class="loadBtn">Load →</button>
+        <button data-slot="3" class="clearBtn">Clear</button>
+    </div>
+    </div>
+    <textarea id="ta3" spellcheck="false" placeholder="Paste full HTML document for Version 3">
+        <!--TEXT AREA 3-->
+<style>
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+.full-width {
+    box-sizing: border-box;
+    width: 100%;
+    height: calc(100vh - 90px);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+.tab-radio {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+}
+.button-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    background: #D6D6D6;
+    padding: 0.5rem;
+    align-items: center;
+    flex-shrink: 0;
+}
+.button-bar label {
+    background: #D6D6D6;
+    color: #000;
+    border: 1px solid #333;
+    padding: 0.5rem 0.75rem;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    user-select: none;
+}
+.service1 {
+    /* display: none; */
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    flex: 1; 
+}
+
+.service1 iframe {
+    width: 100%;
+    height: 100%;
+    display: block;
+    border: 0;
+    box-sizing: border-box;
+}
+.panel-header {
+    background: #D6D6D6;
+    color: #444A40;
+    padding: 1rem;
+    text-align: center;
+}
+.panel-header h1, h2 {
+    margin: 0;
+}
+
+.panel-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: left;
+    font-size: 0.8rem;
+    background: #D6D6D6;
+    color: #444A40;
+    padding: 0.1rem 1rem;
+    z-index: 100;
+    margin: 0;
+    box-sizing: border-box;
+}
+.legend-row {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 0.5rem;
+    align-items: center;
+} 
+/* wrapper for iframe + watermark */
+.iframe-wrap {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+/* ensure iframe fills wrapper and stays behind the watermark */
+.iframe-wrap iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    position: relative;
+    z-index: 0;
+}
+
+/* watermark container in top-right; does not capture pointer events */
+.iframe-wrap .iframe-watermark {
+    position: absolute;
+    top: 12px;
+    right: 5px;
+    z-index: 20;
+    text-align: right;
+  pointer-events: none; /* allow map interaction to pass through */
+}
+
+/* large watermark — adjust width as desired; image already opaque */
+.iframe-wrap .iframe-watermark img {
+    display: inline-block; 
+    width: 20%;          
+    max-width: 100%; 
+    height: auto;
+  opacity: 1;       /* keep full opacity since image is already opaqued */
+}
+
+
+</style>
+<div class="full-width">
+    <div id="rakali_points" class="service1">
+        <div class="panel-header">
+        <h1>Historic Survey Map Areas and the Trees they included</h1>
+        <h2>dark base map</h2>
+
+        <div class="legend" style="width: 400px; font-size: 0.75rem;">
+    <div style="margin-bottom: 4px;">Density of trees per hectare</div>
+
+    <div style="display: flex; height: 18px;">
+        <span style="flex: 1; background: rgb(202,208,198);"></span>
+        <span style="flex: 1; background: rgb(149,160,142);"></span>
+        <span style="flex: 1; background: rgb(97,113,86);"></span>
+        <span style="flex: 1; background: rgb(44,66,29);"></span>
+        <span style="flex: 1; background: rgb(68,74,64);"></span>
+    </div>
+
+    <div style="display: flex; justify-content: space-between; margin-top: 3px;">
+        <span>0.0</span>
+        <span>0.2</span>
+        <span>0.6</span>
+        <span>2.0</span>
+        <span>7.6</span>
+        <span>28.1</span>
+    </div>
+</div>
+    </div>
+
+        <div class="iframe-wrap">
+            <iframe
+            src="https://unimelbmdap.github.io/biodiversity_maps/trees/density_water_log5.html"
+            loading="lazy"
+            title="Historic Tree Map"
+            ></iframe>
+            <span class="iframe-watermark" aria-hidden="true">
+                <img src="https://unimelbmdap.github.io/biodiversity_maps/assets/uom_logo_no_background.png" alt="University of Melbourne Logo">
+            </span>
+        </div>
+    </div>
+</div>
+<div id="data_source" class="panel-footer" role="contentinfo">
+    <p>Data: details<br>
+Researchers: Prof Nick Williams and A/Prof Amy Ahas
+Map: Dr Emily Fitzgerald, Melbourne Data Analytics Platform (MDAP), Orignal RA name</p>
+</div>
+
+        <!--END OF TEXT AREA 3-->
+    </textarea>
+</div>
+</div>
+
+<script>
+(function () {
+var ta1 = document.getElementById('ta1'), ta2 = document.getElementById('ta2'), ta3 = document.getElementById('ta3');
+var ifr1 = document.getElementById('iframe1'), ifr2 = document.getElementById('iframe2'), ifr3 = document.getElementById('iframe3');
+var loadBtns = document.querySelectorAll('.loadBtn'), clearBtns = document.querySelectorAll('.clearBtn');
+
+function setSlot(n, html) {
+var iframe = document.getElementById('iframe' + n);
+var label = document.getElementById('label' + n);
+if (!html || !html.trim()) {
+    iframe.srcdoc = '<!doctype html><html><head><meta charset="utf-8"><title>Empty</title></head><body style="padding:12px">Empty slot</body></html>';
+    label.textContent = '';
+    return;
+}
+try {
+    iframe.srcdoc = html;
+    label.textContent = 'loaded';
+} catch (e) {
+    try {
+    iframe.src = 'data:text/html;charset=utf-8,' + encodeURIComponent(html);
+    label.textContent = 'loaded';
+    } catch (e2) {
+    var doc = iframe.contentWindow && iframe.contentWindow.document;
+    if (doc) {
+        doc.open();
+        doc.write(html);
+        doc.close();
+        label.textContent = 'loaded';
+    } else {
+        label.textContent = 'error';
+        console.error('Unable to write to iframe', e2 || e);
+    }
+    }
+}
+}
+
+// Sequential loader: load slots one at a time with delay
+function loadSequential(slots, delay) {
+var idx = 0;
+function loadNext() {
+    if (idx >= slots.length) return;
+    var n = slots[idx];
+    var content = (n === 1) ? ta1.value : (n === 2) ? ta2.value : ta3.value;
+    setSlot(n, content);
+    idx++;
+    setTimeout(loadNext, delay);
+}
+loadNext();
+}
+
+loadBtns.forEach(function (btn) {
+btn.addEventListener('click', function () {
+    var n = btn.getAttribute('data-slot');
+    var content = (n === '1') ? ta1.value : (n === '2') ? ta2.value : ta3.value;
+    setSlot(n, content);
+});
+});
+
+clearBtns.forEach(function (btn) {
+btn.addEventListener('click', function () {
+    var n = btn.getAttribute('data-slot');
+    if (n === '1') ta1.value = ''; if (n === '2') ta2.value = ''; if (n === '3') ta3.value = '';
+    setSlot(n, '');
+});
+});
+
+// Load all: sequential with 1 second delay between slots
+document.getElementById('loadAll').addEventListener('click', function () {
+loadSequential([1, 2, 3], 1000);
+});
+
+document.getElementById('clearAll').addEventListener('click', function () {
+ta1.value = ''; ta2.value = ''; ta3.value = '';
+setSlot(1, ''); setSlot(2, ''); setSlot(3, '');
+});
+
+document.getElementById('openInWindow').addEventListener('click', function () {
+var contents = ta1.value || ta2.value || ta3.value;
+if (!contents) { alert('No content to open. Paste HTML into a slot first.'); return; }
+var w = window.open();
+w.document.open();
+w.document.write(contents);
+w.document.close();
+});
+
+var display = document.getElementById('display');
+
+document.getElementById('oneCol').addEventListener('click', function () {
+    display.style.gridTemplateColumns = '1fr';
+    document.querySelectorAll('.slot').forEach(function (slot, idx) {
+        slot.style.display = idx === 0 ? 'flex' : 'none';
+    });
+    document.querySelectorAll('.editor').forEach(function (editor, idx) {
+        editor.style.display = idx === 0 ? 'flex' : 'none';
+    });
+});
+
+document.getElementById('twoCol').addEventListener('click', function () {
+    display.style.gridTemplateColumns = '1fr 1fr';
+    document.querySelectorAll('.slot').forEach(function (slot, idx) {
+        slot.style.display = idx < 2 ? 'flex' : 'none';
+    });
+    document.querySelectorAll('.editor').forEach(function (editor, idx) {
+        editor.style.display = idx < 2 ? 'flex' : 'none';
+    });
+});
+
+document.getElementById('threeCol').addEventListener('click', function () {
+    display.style.gridTemplateColumns = 'repeat(3,1fr)';
+    document.querySelectorAll('.slot').forEach(function (slot) {
+        slot.style.display = 'flex';
+    });
+    document.querySelectorAll('.editor').forEach(function (editor) {
+        editor.style.display = 'flex';
+    });
+});
+
+var editors = document.querySelector('.editors');
+
+
+// ----- AUTO-LOAD ON OPEN (sequential) -----
+document.addEventListener('DOMContentLoaded', function () {
+var toLoad = [];
+if (ta1.value && ta1.value.trim()) toLoad.push(1);
+if (ta2.value && ta2.value.trim()) toLoad.push(2);
+if (ta3.value && ta3.value.trim()) toLoad.push(3);
+if (toLoad.length > 0) {
+    loadSequential(toLoad, 1200); // stagger by 1.2 seconds
+}
+});
+
+setSlot(1, ''); setSlot(2, ''); setSlot(3, '');
+})();
+</script>
