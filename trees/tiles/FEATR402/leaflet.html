@@ -41,23 +41,23 @@
 
 // Base layers
 //  .. OpenStreetMap
-var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors', minZoom: 8, maxZoom: 18});
+var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors', minZoom: 8, maxZoom: 19});
 
 //  .. CartoDB Positron
-var cartodb = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/attribution">CartoDB</a>', minZoom: 8, maxZoom: 18});
+var cartodb = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/attribution">CartoDB</a>', minZoom: 8, maxZoom: 19});
 
 //  .. White background
-var white = L.tileLayer("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEAAQMAAABmvDolAAAAA1BMVEX///+nxBvIAAAAH0lEQVQYGe3BAQ0AAADCIPunfg43YAAAAAAAAAAA5wIhAAAB9aK9BAAAAABJRU5ErkJggg==", {minZoom: 8, maxZoom: 18});
+var white = L.tileLayer("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEAAQMAAABmvDolAAAAA1BMVEX///+nxBvIAAAAH0lEQVQYGe3BAQ0AAADCIPunfg43YAAAAAAAAAAA5wIhAAAB9aK9BAAAAABJRU5ErkJggg==", {minZoom: 8, maxZoom: 19});
 
 // Overlay layers (TMS)
-var lyr = L.tileLayer('./{z}/{x}/{y}.png', {tms: 0, opacity: 0.7, attribution: "", minZoom: 8, maxZoom: 18});
+var lyr = L.tileLayer('./{z}/{x}/{y}.png', {tms: 0, opacity: 0.7, attribution: "", minZoom: 8, maxZoom: 19});
 
 // Map
 var map = L.map('map', {
-    center: [-37.862305837589034, 145.00080328354454],
-    zoom: 18,
+    center: [-37.891074835874598, 144.99613647066886],
+    zoom: 19,
     minZoom: 8,
-    maxZoom: 18,
+    maxZoom: 19,
     layers: [osm, lyr]
 });
 
@@ -94,7 +94,7 @@ title.addTo(map);
 L.control.layers(basemaps, overlaymaps, {collapsed: false}).addTo(map);
 
 // Fit to overlay bounds (SW and NE points with (lat, lon))
-map.fitBounds([[-37.868970171901282, 145.02019313221612], [-37.855641503276779, 144.98141343487293]]);
+map.fitBounds([[-37.900581467538885, 145.01479394433275], [-37.881568204210311, 144.97747899700497]]);
 
 </script>
 

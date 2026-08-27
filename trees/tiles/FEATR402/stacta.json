@@ -8,40 +8,40 @@
   "id":"FEATR402_clipped_3857.tif",
   "type":"Feature",
   "bbox":[
-    144.98141343487293,
-    -37.868970171901282,
-    145.02019313221612,
-    -37.855641503276779
+    144.97747899700497,
+    -37.900581467538885,
+    145.01479394433275,
+    -37.881568204210311
   ],
   "geometry":{
     "type":"Polygon",
     "coordinates":[
       [
         [
-          144.98141343487293,
-          -37.868970171901282
+          144.97747899700497,
+          -37.900581467538885
         ],
         [
-          144.98141343487293,
-          -37.855641503276779
+          144.97747899700497,
+          -37.881568204210311
         ],
         [
-          145.02019313221612,
-          -37.855641503276779
+          145.01479394433275,
+          -37.881568204210311
         ],
         [
-          145.02019313221612,
-          -37.868970171901282
+          145.01479394433275,
+          -37.900581467538885
         ],
         [
-          144.98141343487293,
-          -37.868970171901282
+          144.97747899700497,
+          -37.900581467538885
         ]
       ]
     ]
   },
   "properties":{
-    "datetime":"2026-08-12T05:38:45Z",
+    "datetime":"2026-08-27T08:31:19Z",
     "start_datetime":"0001-01-01T00:00:00.000Z",
     "end_datetime":"9999-12-31T23:59:59.999Z",
     "tiles:tile_matrix_sets":{
@@ -206,6 +206,19 @@
             "tileHeight":256,
             "matrixWidth":262144,
             "matrixHeight":262144
+          },
+          {
+            "type":"TileMatrixType",
+            "identifier":"19",
+            "scaleDenominator":1066.364791924892,
+            "topLeftCorner":[
+              -20037508.342789244,
+              20037508.342789244
+            ],
+            "tileWidth":256,
+            "tileHeight":256,
+            "matrixWidth":524288,
+            "matrixHeight":524288
           }
         ]
       }
@@ -234,67 +247,73 @@
           },
           "11":{
             "min_tile_col":1848,
-            "max_tile_col":1849,
-            "min_tile_row":1256,
+            "max_tile_col":1848,
+            "min_tile_row":1257,
             "max_tile_row":1257
           },
           "12":{
             "min_tile_col":3697,
-            "max_tile_col":3698,
-            "min_tile_row":2513,
+            "max_tile_col":3697,
+            "min_tile_row":2514,
             "max_tile_row":2514
           },
           "13":{
             "min_tile_col":7395,
-            "max_tile_col":7396,
-            "min_tile_row":5027,
-            "max_tile_row":5028
+            "max_tile_col":7395,
+            "min_tile_row":5028,
+            "max_tile_row":5029
           },
           "14":{
             "min_tile_col":14790,
-            "max_tile_col":14792,
-            "min_tile_row":10055,
-            "max_tile_row":10056
+            "max_tile_col":14791,
+            "min_tile_row":10057,
+            "max_tile_row":10058
           },
           "15":{
             "min_tile_col":29580,
-            "max_tile_col":29584,
-            "min_tile_row":20111,
-            "max_tile_row":20113
+            "max_tile_col":29583,
+            "min_tile_row":20114,
+            "max_tile_row":20116
           },
           "16":{
-            "min_tile_col":59161,
-            "max_tile_col":59168,
-            "min_tile_row":40223,
-            "max_tile_row":40226
+            "min_tile_col":59160,
+            "max_tile_col":59167,
+            "min_tile_row":40229,
+            "max_tile_row":40233
           },
           "17":{
-            "min_tile_col":118322,
-            "max_tile_col":118336,
-            "min_tile_row":80447,
-            "max_tile_row":80453
+            "min_tile_col":118320,
+            "max_tile_col":118334,
+            "min_tile_row":80459,
+            "max_tile_row":80467
           },
           "18":{
-            "min_tile_col":236644,
-            "max_tile_col":236672,
-            "min_tile_row":160894,
-            "max_tile_row":160906
+            "min_tile_col":236641,
+            "max_tile_col":236668,
+            "min_tile_row":160918,
+            "max_tile_row":160935
+          },
+          "19":{
+            "min_tile_col":473282,
+            "max_tile_col":473337,
+            "min_tile_row":321836,
+            "max_tile_row":321871
           }
         }
       }
     },
     "proj:code":"EPSG:3857",
     "proj:shape":[
-      3328,
-      7424
+      9216,
+      14336
     ],
     "proj:transform":[
-      0.59716428347793948,
+      0.29858214173896974,
       0.0,
-      16139219.900245255,
+      16138761.278075544,
       0.0,
-      -0.59716428347793948,
-      44634026.800619543,
+      -0.29858214173896974,
+      44637695.777977228,
       0.0,
       0.0,
       0.0
