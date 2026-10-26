@@ -15,6 +15,18 @@
     <style>
         body { margin: 0; }
         #map { width: 100vw; height: 100vh; }
+
+        .polygon-tooltip .maplibregl-popup-content {
+            background-color: rgba(211, 211, 211, 0.7);
+            color: black;
+            font-size: 12px;
+            padding: 8px 12px;
+            border-radius: 4px;
+        }
+
+        .polygon-tooltip .maplibregl-popup-tip {
+            display: none;
+        }
     </style>
 </head>
 
@@ -58,15 +70,19 @@
 
     const popup = new maplibregl.Popup({
         closeButton: false,
-        closeOnClick: false
+        closeOnClick: false,
+        offset: 12,
+        className: "polygon-tooltip"
     });
 
-    map.on("mousemove", "polygon-fill", (e) => {
+    // Track whether the popup was opened by a mobile tap
+    let touchPopupActive = false;
+
+    // Reusable tooltip function
+    function showTooltip(e) {
         if (!e.features?.length) return;
 
         const p = e.features[0].properties;
-
-        map.getCanvas().style.cursor = "pointer";
 
         const content = document.createElement("div");
 
@@ -82,13 +98,51 @@
             .setLngLat(e.lngLat)
             .setDOMContent(content)
             .addTo(map);
-        });
+    }
 
+    // Desktop: tooltip follows the mouse
+    map.on("mousemove", "polygon-fill", (e) => {
+        if (e.originalEvent?.pointerType === "touch") return;
+        if (touchPopupActive) return;
+
+        map.getCanvas().style.cursor = "pointer";
+
+        // e.lngLat updates with each mouse movement
+        showTooltip(e);
+    });
+
+    // Desktop: hide tooltip when leaving a polygon
     map.on("mouseleave", "polygon-fill", () => {
         map.getCanvas().style.cursor = "";
-        popup.remove();
-        });
+
+        if (!touchPopupActive) {
+            popup.remove();
+        }
     });
+
+    // Mobile: show tooltip on tap
+    map.on("click", "polygon-fill", (e) => {
+        // Only use the click handler for touch devices
+        if (!window.matchMedia("(hover: none)").matches) return;
+
+        touchPopupActive = true;
+        showTooltip(e);
+    });
+
+    // Mobile: dismiss when tapping outside a polygon
+    map.on("click", (e) => {
+        if (!touchPopupActive) return;
+
+        const features = map.queryRenderedFeatures(e.point, {
+            layers: ["polygon-fill"]
+        });
+
+        if (!features.length) {
+            popup.remove();
+            touchPopupActive = false;
+        }
+    });
+});
 </script>
 </body>
 </html>
