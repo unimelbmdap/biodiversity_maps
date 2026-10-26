@@ -1,0 +1,61 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Polygon Map</title>
+
+    <link rel="stylesheet"
+    href="https://unpkg.com/maplibre-gl@5.13.0/dist/maplibre-gl.css">
+
+    <script src="https://unpkg.com/maplibre-gl@5.13.0/dist/maplibre-gl.js"></script>
+    <script src="https://unpkg.com/pmtiles@4.5.0/dist/pmtiles.js"></script>
+
+    <style>
+        body { margin: 0; }
+        #map { width: 100vw; height: 100vh; }
+    </style>
+</head>
+
+<body>
+<div id="map"></div>
+
+<script>
+    const protocol = new pmtiles.Protocol();
+    maplibregl.addProtocol("pmtiles", protocol.tile);
+
+    const map = new maplibregl.Map({
+    container: "map",
+    style: "https://tiles.openfreemap.org/styles/dark",
+    center: [144.95, -37.85],
+    zoom: 8.8,
+    });
+
+    map.addControl(new maplibregl.NavigationControl());
+
+    map.on("load", () => { 
+        const tilesURL = new URL(
+        "./tiles/igs_raster.pmtiles",
+        window.location.href
+    ).href;
+
+    map.addSource("igs_raster", {
+        type: "raster",
+        url: `pmtiles://${tilesURL}`,
+        tileSize: 256
+    });
+
+    map.addLayer({
+        id: "igs-raster-layer",
+        type: "raster",
+        source: "igs_raster",
+        paint: {
+            "raster-opacity": 1,
+            "raster-resampling": "linear"
+        }
+    });
+});
+</script>
+</body>
+</html>
