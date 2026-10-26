@@ -1,0 +1,3406 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <title>pydeck</title>
+        <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v1.13.0/mapbox-gl.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.14.0/dist/maplibre-gl.css" />
+    <script src='https://cdn.jsdelivr.net/npm/@deck.gl/jupyter-widget@~9.3.*/dist/index.js'></script>
+    <link rel="stylesheet" href=https://cdn.jsdelivr.net/npm/@deck.gl/widgets@~9.3.*/dist/stylesheet.css />
+    <style>
+    body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+#deck-container {
+  width: 100vw;
+  height: 100vh;
+}
+
+#deck-container canvas {
+  z-index: 1;
+  background: none;
+}
+
+#deck-container .error_text {
+  color: red;
+  background: none;
+  position: absolute;
+  z-index: 100;
+}
+    </style>
+  </head>
+  <body>
+    <div id="deck-container">
+    </div>
+  </body>
+  <script>
+    const container = document.getElementById('deck-container');
+    const jsonInput = {
+  "initialViewState": {
+    "latitude": -37.81991841789067,
+    "longitude": 144.82598169188128,
+    "zoom": 17.5
+  },
+  "layers": [
+    {
+      "@@type": "GeoJsonLayer",
+      "data": [
+        {
+          "descriptio": "water",
+          "geometry": {
+            "coordinates": [
+              [
+                [
+                  144.82616877517756,
+                  -37.81966616701303
+                ],
+                [
+                  144.826166855886,
+                  -37.81964959318945
+                ],
+                [
+                  144.82619102934063,
+                  -37.81964558687677
+                ],
+                [
+                  144.82620049793283,
+                  -37.81962349848751
+                ],
+                [
+                  144.8262319588513,
+                  -37.81961708235057
+                ],
+                [
+                  144.82624101706025,
+                  -37.81960898040021
+                ],
+                [
+                  144.82624219155008,
+                  -37.81959628024909
+                ],
+                [
+                  144.8262502804499,
+                  -37.819593885227675
+                ],
+                [
+                  144.82625644939216,
+                  -37.81960226831814
+                ],
+                [
+                  144.8262577538033,
+                  -37.81961246987013
+                ],
+                [
+                  144.82626694257874,
+                  -37.81959991768585
+                ],
+                [
+                  144.82627605674003,
+                  -37.81958990849036
+                ],
+                [
+                  144.82627784612478,
+                  -37.81958358060941
+                ],
+                [
+                  144.82630757359593,
+                  -37.81958158509025
+                ],
+                [
+                  144.82630973602664,
+                  -37.81956254226007
+                ],
+                [
+                  144.8263268644611,
+                  -37.81955268102377
+                ],
+                [
+                  144.82632483322197,
+                  -37.81953992168613
+                ],
+                [
+                  144.82634363911387,
+                  -37.819527547049844
+                ],
+                [
+                  144.82635750586772,
+                  -37.819519533866426
+                ],
+                [
+                  144.82636747739033,
+                  -37.81950763221671
+                ],
+                [
+                  144.82638130683432,
+                  -37.81950089052519
+                ],
+                [
+                  144.82639293656652,
+                  -37.81951446315963
+                ],
+                [
+                  144.82640756743757,
+                  -37.819507736260796
+                ],
+                [
+                  144.82641125808894,
+                  -37.819491266008974
+                ],
+                [
+                  144.82641399809904,
+                  -37.819479866941194
+                ],
+                [
+                  144.82642946769158,
+                  -37.819471883339986
+                ],
+                [
+                  144.82644722965608,
+                  -37.81946775860792
+                ],
+                [
+                  144.8264666690778,
+                  -37.819461120473626
+                ],
+                [
+                  144.826494961499,
+                  -37.81945337358719
+                ],
+                [
+                  144.82651074758837,
+                  -37.81946193420563
+                ],
+                [
+                  144.82651115735231,
+                  -37.8194752996987
+                ],
+                [
+                  144.82653678438624,
+                  -37.8194764088828
+                ],
+                [
+                  144.826549867797,
+                  -37.819495097072455
+                ],
+                [
+                  144.82654647558192,
+                  -37.819501395368924
+                ],
+                [
+                  144.8265541914564,
+                  -37.81951171527681
+                ],
+                [
+                  144.8265541914564,
+                  -37.81951171527681
+                ],
+                [
+                  144.8265496807568,
+                  -37.819528806486815
+                ],
+                [
+                  144.82655488044747,
+                  -37.8195428964957
+                ],
+                [
+                  144.8265675540999,
+                  -37.81954821919063
+                ],
+                [
+                  144.82655370601242,
+                  -37.81955559665176
+                ],
+                [
+                  144.82657428205172,
+                  -37.819564881778184
+                ],
+                [
+                  144.82658522230142,
+                  -37.819574625114996
+                ],
+                [
+                  144.82656099293658,
+                  -37.819580538752675
+                ],
+                [
+                  144.8265516177086,
+                  -37.81959944843691
+                ],
+                [
+                  144.82652779809968,
+                  -37.81961872756015
+                ],
+                [
+                  144.8265248715944,
+                  -37.819636484105864
+                ],
+                [
+                  144.82650064220488,
+                  -37.8196423977303
+                ],
+                [
+                  144.8264802520998,
+                  -37.81965410705338
+                ],
+                [
+                  144.82644681529794,
+                  -37.81967320861549
+                ],
+                [
+                  144.8264311031948,
+                  -37.81968945693462
+                ],
+                [
+                  144.82639936248356,
+                  -37.81970540933616
+                ],
+                [
+                  144.82637746274494,
+                  -37.81971391031141
+                ],
+                [
+                  144.82637291468626,
+                  -37.81973227300734
+                ],
+                [
+                  144.82634855468888,
+                  -37.819742636831066
+                ],
+                [
+                  144.8263306807386,
+                  -37.819750576030415
+                ],
+                [
+                  144.82631032788262,
+                  -37.81976101382727
+                ],
+                [
+                  144.82628619170077,
+                  -37.819763748668635
+                ],
+                [
+                  144.8262827061862,
+                  -37.81977322569317
+                ],
+                [
+                  144.82626738573782,
+                  -37.81977612329313
+                ],
+                [
+                  144.8262408266044,
+                  -37.819779449482134
+                ],
+                [
+                  144.82623022147177,
+                  -37.81978561459548
+                ],
+                [
+                  144.82620438915055,
+                  -37.81979149856255
+                ],
+                [
+                  144.82618446530068,
+                  -37.81978731414744
+                ],
+                [
+                  144.82617346911425,
+                  -37.81977947801642
+                ],
+                [
+                  144.8261698723437,
+                  -37.819765417587725
+                ],
+                [
+                  144.8261566770632,
+                  -37.819750543842204
+                ],
+                [
+                  144.8261464450075,
+                  -37.81974399400102
+                ],
+                [
+                  144.82613584056637,
+                  -37.81972280717253
+                ],
+                [
+                  144.82613548683312,
+                  -37.81970753443867
+                ],
+                [
+                  144.8261469680073,
+                  -37.819698841141815
+                ],
+                [
+                  144.8261449741044,
+                  -37.8196848103075
+                ],
+                [
+                  144.82616877517756,
+                  -37.81966616701303
+                ]
+              ]
+            ],
+            "type": "Polygon"
+          },
+          "id": null
+        }
+      ],
+      "extruded": false,
+      "filled": true,
+      "getFillColor": [
+        128,
+        135,
+        162
+      ],
+      "getLineColor": [
+        128,
+        135,
+        162
+      ],
+      "id": "c8a8ceab-d39a-4923-b3e1-e79fc87282d7",
+      "opacity": 0.8,
+      "pickable": false,
+      "stroked": true
+    },
+    {
+      "@@type": "ScatterplotLayer",
+      "data": [
+        {
+          "Image link": "",
+          "citation": "iNaturalist, observed 07/12/2019",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.8212701023,
+          "long": 144.8255297594,
+          "preferred_common_name": "artichoke thistle",
+          "scientific_name": "Cynara cardunculus"
+        },
+        {
+          "Image link": "",
+          "citation": "iNaturalist, observed 02/10/2026",
+          "color": [
+            255,
+            214,
+            41
+          ],
+          "lat": -37.8184835147,
+          "long": 144.824178759,
+          "preferred_common_name": "australian emperor",
+          "scientific_name": "Anax papuensis"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0030/127488/Australian-fuchsia.jpg",
+          "citation": "iNaturalist, observed 29/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.8196044371,
+          "long": 144.8259514133,
+          "preferred_common_name": "australian fuchsia",
+          "scientific_name": "Correa"
+        },
+        {
+          "Image link": "",
+          "citation": "iNaturalist, observed 08/06/2026",
+          "color": [
+            70,
+            200,
+            240
+          ],
+          "lat": -37.8198966667,
+          "long": 144.8267533333,
+          "preferred_common_name": "australian ibis",
+          "scientific_name": "Threskiornis molucca"
+        },
+        {
+          "Image link": "",
+          "citation": "iNaturalist, observed 16/10/2017",
+          "color": [
+            70,
+            200,
+            240
+          ],
+          "lat": -37.8209956684,
+          "long": 144.8263744503,
+          "preferred_common_name": "australian magpie",
+          "scientific_name": "Gymnorhina tibicen"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/articles/hidden-landscapes-tooltip-image-bank/Blue-Tongue-lizard.jpg",
+          "citation": "",
+          "color": [
+            159,
+            184,
+            37
+          ],
+          "lat": -37.82028174839991,
+          "long": 144.8258727859061,
+          "preferred_common_name": "blue tongued lizard",
+          "scientific_name": "Tiliqua scincoides"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0023/127382/Bottle-brushes.jpg",
+          "citation": "team survey, observed 29/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.81959052629335,
+          "long": 144.8259252188537,
+          "preferred_common_name": "bottle brushes/callistemon",
+          "scientific_name": "Callistemon viminalis"
+        },
+        {
+          "Image link": "",
+          "citation": "iNaturalist, observed 29/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.819670784,
+          "long": 144.8259645716,
+          "preferred_common_name": "bottlebrushes",
+          "scientific_name": "Melaleuca"
+        },
+        {
+          "Image link": "",
+          "citation": "iNaturalist, observed 04/06/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.8212657592,
+          "long": 144.8257033823,
+          "preferred_common_name": "bower spinach",
+          "scientific_name": "Tetragonia implexicoma"
+        },
+        {
+          "Image link": "",
+          "citation": "team survey, observed 03/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.82033081719662,
+          "long": 144.8261697821218,
+          "preferred_common_name": "boxthorns",
+          "scientific_name": ""
+        },
+        {
+          "Image link": "",
+          "citation": "iNaturalist, observed 03/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.82047,
+          "long": 144.8254083333,
+          "preferred_common_name": "brakes",
+          "scientific_name": "Pteris"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0031/127489/Brakes-and-Ferns.jpg",
+          "citation": "team survey, observed 03/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.82033820100076,
+          "long": 144.825878264635,
+          "preferred_common_name": "brakes/'ferns'",
+          "scientific_name": ""
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0031/127489/Brakes-and-Ferns.jpg",
+          "citation": "team survey, observed 03/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.82034392740685,
+          "long": 144.8258426898552,
+          "preferred_common_name": "brakes/'ferns'",
+          "scientific_name": ""
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0031/127489/Brakes-and-Ferns.jpg",
+          "citation": "team survey, observed 03/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.82035739878156,
+          "long": 144.8258117159699,
+          "preferred_common_name": "brakes/'ferns'",
+          "scientific_name": ""
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0031/127489/Brakes-and-Ferns.jpg",
+          "citation": "team survey, observed 03/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.82036449025939,
+          "long": 144.8257809293067,
+          "preferred_common_name": "brakes/'ferns'",
+          "scientific_name": ""
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0031/127489/Brakes-and-Ferns.jpg",
+          "citation": "team survey, observed 03/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.82037760515213,
+          "long": 144.825730653092,
+          "preferred_common_name": "brakes/'ferns'",
+          "scientific_name": ""
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0031/127489/Brakes-and-Ferns.jpg",
+          "citation": "team survey, observed 03/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.82038968169451,
+          "long": 144.8256932825172,
+          "preferred_common_name": "brakes/'ferns'",
+          "scientific_name": ""
+        },
+        {
+          "Image link": "",
+          "citation": "iNaturalist, observed 10/06/2025",
+          "color": [
+            255,
+            214,
+            41
+          ],
+          "lat": -37.8193454997,
+          "long": 144.8265486997,
+          "preferred_common_name": "butterflies and moths",
+          "scientific_name": "Lepidoptera"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0024/127383/Cabbage-white-butterfly_.jpg",
+          "citation": "",
+          "color": [
+            255,
+            214,
+            41
+          ],
+          "lat": -37.82005616296537,
+          "long": 144.8257619089778,
+          "preferred_common_name": "cabbage white butterflies",
+          "scientific_name": "Pieris rapae"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0024/127383/Cabbage-white-butterfly_.jpg",
+          "citation": "team survey, observed 29/09/2026",
+          "color": [
+            255,
+            214,
+            41
+          ],
+          "lat": -37.82012585614188,
+          "long": 144.8256318516968,
+          "preferred_common_name": "cabbage white butterflies",
+          "scientific_name": "Pieris rapae"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0024/127383/Cabbage-white-butterfly_.jpg",
+          "citation": "team survey, observed 29/09/2026",
+          "color": [
+            255,
+            214,
+            41
+          ],
+          "lat": -37.82019253950395,
+          "long": 144.8261405752784,
+          "preferred_common_name": "cabbage white butterflies",
+          "scientific_name": "Pieris rapae"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0025/127384/Canola.jpg",
+          "citation": "",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.82026091727617,
+          "long": 144.8259657354054,
+          "preferred_common_name": "canola",
+          "scientific_name": "Brassica napus subsp. napus"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0025/127384/Canola.jpg",
+          "citation": "team survey, observed 08/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.81994416941545,
+          "long": 144.8257647582632,
+          "preferred_common_name": "canola",
+          "scientific_name": "Brassica napus subsp. napus"
+        },
+        {
+          "Image link": "",
+          "citation": "iNaturalist, observed 03/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.8199583054,
+          "long": 144.8255578365,
+          "preferred_common_name": "capillary thread-moss",
+          "scientific_name": "Ptychostomum capillare"
+        },
+        {
+          "Image link": "",
+          "citation": "iNaturalist, observed 04/04/2023",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.8208255004,
+          "long": 144.8253698079,
+          "preferred_common_name": "climbing saltbush",
+          "scientific_name": "Chenopodium nutans"
+        },
+        {
+          "Image link": "",
+          "citation": "iNaturalist, observed 04/04/2023",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.8212851704,
+          "long": 144.8258021264,
+          "preferred_common_name": "climbing saltbush",
+          "scientific_name": "Chenopodium nutans"
+        },
+        {
+          "Image link": "",
+          "citation": "iNaturalist, observed 10/06/2025",
+          "color": [
+            97,
+            97,
+            97
+          ],
+          "lat": -37.8193454997,
+          "long": 144.8265486997,
+          "preferred_common_name": "comb-footed spiders",
+          "scientific_name": "Theridiidae"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0027/127386/Common-eastern-froglet.jpg",
+          "citation": "",
+          "color": [
+            159,
+            184,
+            37
+          ],
+          "lat": -37.81966641589742,
+          "long": 144.826074697094,
+          "preferred_common_name": "common froglet",
+          "scientific_name": "Crinia signifera"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0027/127386/Common-eastern-froglet.jpg",
+          "citation": "",
+          "color": [
+            159,
+            184,
+            37
+          ],
+          "lat": -37.81972161645668,
+          "long": 144.8260730773601,
+          "preferred_common_name": "common froglet",
+          "scientific_name": "Crinia signifera"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0028/127387/Common-myna.jpg",
+          "citation": "",
+          "color": [
+            70,
+            200,
+            240
+          ],
+          "lat": -37.82039548218756,
+          "long": 144.8258662566901,
+          "preferred_common_name": "common myna",
+          "scientific_name": "Acridotheres tristis"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0029/127388/Common-reed.jpg",
+          "citation": "team survey, observed 29/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.82041346359672,
+          "long": 144.8251995064281,
+          "preferred_common_name": "common reed",
+          "scientific_name": "Phragmites australis"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0029/127388/Common-reed.jpg",
+          "citation": "team survey, observed 29/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.82004913319587,
+          "long": 144.8256571924692,
+          "preferred_common_name": "common reed",
+          "scientific_name": "Phragmites australis"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0029/127388/Common-reed.jpg",
+          "citation": "iNaturalist, observed 03/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.8200571721,
+          "long": 144.8255799751,
+          "preferred_common_name": "common reed",
+          "scientific_name": "Phragmites australis"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0029/127388/Common-reed.jpg",
+          "citation": "iNaturalist, observed 04/04/2023",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.8208209342,
+          "long": 144.825791605,
+          "preferred_common_name": "common reed",
+          "scientific_name": "Phragmites australis"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0030/127389/Common-starling.jpg",
+          "citation": "",
+          "color": [
+            70,
+            200,
+            240
+          ],
+          "lat": -37.81991781223464,
+          "long": 144.8256376038783,
+          "preferred_common_name": "common starling",
+          "scientific_name": "Sturnus vulgaris"
+        },
+        {
+          "Image link": "",
+          "citation": "team survey, observed 29/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.81960158756586,
+          "long": 144.8258765511148,
+          "preferred_common_name": "common vetch",
+          "scientific_name": "Vicia sativa"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0022/127390/Cotton-burnweed.jpg",
+          "citation": "team survey, observed 03/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.81984546923125,
+          "long": 144.8260890692891,
+          "preferred_common_name": "cotton burnweed",
+          "scientific_name": "Senecio quadridentatus"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0022/127390/Cotton-burnweed.jpg",
+          "citation": "iNaturalist, observed 03/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.8198449389,
+          "long": 144.8260869213,
+          "preferred_common_name": "cotton burnweed",
+          "scientific_name": "Senecio quadridentatus"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0023/127391/Cotton-harlequin-bug.jpg",
+          "citation": "",
+          "color": [
+            255,
+            214,
+            41
+          ],
+          "lat": -37.82012937136223,
+          "long": 144.8261864124051,
+          "preferred_common_name": "cotton harlequin bug",
+          "scientific_name": "Tectocoris diophthalmus"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0024/127392/Crested-pigeon.jpg",
+          "citation": "",
+          "color": [
+            70,
+            200,
+            240
+          ],
+          "lat": -37.81965785560021,
+          "long": 144.8258685217697,
+          "preferred_common_name": "crested pigeon",
+          "scientific_name": "Ocyphaps lophotes"
+        },
+        {
+          "Image link": "",
+          "citation": "iNaturalist, observed 12/01/2026",
+          "color": [
+            159,
+            184,
+            37
+          ],
+          "lat": -37.8201216667,
+          "long": 144.825945,
+          "preferred_common_name": "cunningham's skink",
+          "scientific_name": "Egernia cunninghami"
+        },
+        {
+          "Image link": "",
+          "citation": "",
+          "color": [
+            255,
+            214,
+            41
+          ],
+          "lat": -37.81983551300788,
+          "long": 144.8261458568799,
+          "preferred_common_name": "dragonfly",
+          "scientific_name": ""
+        },
+        {
+          "Image link": "",
+          "citation": "team survey, observed 29/09/2026",
+          "color": [
+            255,
+            214,
+            41
+          ],
+          "lat": -37.81948353278479,
+          "long": 144.8263875455935,
+          "preferred_common_name": "dragonfly",
+          "scientific_name": "Anisoptera (sub-order)"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0026/127394/eastern-Banjo-frog.jpg",
+          "citation": "",
+          "color": [
+            159,
+            184,
+            37
+          ],
+          "lat": -37.81963444809647,
+          "long": 144.8260943147374,
+          "preferred_common_name": "eastern banjo frog",
+          "scientific_name": "Limnodynastes dumerilii"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0026/127394/eastern-Banjo-frog.jpg",
+          "citation": "",
+          "color": [
+            159,
+            184,
+            37
+          ],
+          "lat": -37.81967875246252,
+          "long": 144.8260862221464,
+          "preferred_common_name": "eastern banjo frog",
+          "scientific_name": "Limnodynastes dumerilii"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0026/127394/eastern-Banjo-frog.jpg",
+          "citation": "team survey, observed 03/09/2026",
+          "color": [
+            159,
+            184,
+            37
+          ],
+          "lat": -37.81959345151497,
+          "long": 144.826331576987,
+          "preferred_common_name": "eastern banjo frog",
+          "scientific_name": "Limnodynastes dumerilii"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0026/127394/eastern-Banjo-frog.jpg",
+          "citation": "team survey, observed 08/09/2026",
+          "color": [
+            159,
+            184,
+            37
+          ],
+          "lat": -37.81967226381568,
+          "long": 144.826207098966,
+          "preferred_common_name": "eastern banjo frog",
+          "scientific_name": "Limnodynastes dumerilii"
+        },
+        {
+          "Image link": "",
+          "citation": "iNaturalist, observed 12/01/2024",
+          "color": [
+            159,
+            184,
+            37
+          ],
+          "lat": -37.819790366,
+          "long": 144.8253815621,
+          "preferred_common_name": "eastern brown snake",
+          "scientific_name": "Pseudonaja textilis"
+        },
+        {
+          "Image link": "",
+          "citation": "",
+          "color": [
+            255,
+            214,
+            41
+          ],
+          "lat": -37.8200320955095,
+          "long": 144.825657613877,
+          "preferred_common_name": "emperor dragonfly",
+          "scientific_name": ""
+        },
+        {
+          "Image link": "",
+          "citation": "iNaturalist, observed 17/01/2025",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.8196789235,
+          "long": 144.8247608079,
+          "preferred_common_name": "eucalyptus",
+          "scientific_name": "Eucalyptus"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0027/127395/Eurasian-coot.jpg",
+          "citation": "",
+          "color": [
+            70,
+            200,
+            240
+          ],
+          "lat": -37.81949307567238,
+          "long": 144.8264356832657,
+          "preferred_common_name": "eurasian coot",
+          "scientific_name": "Fulica atra"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0030/127398/European-wasp.jpg",
+          "citation": "",
+          "color": [
+            255,
+            214,
+            41
+          ],
+          "lat": -37.81997313030916,
+          "long": 144.8264661255355,
+          "preferred_common_name": "european wasp",
+          "scientific_name": "Vespula germanica"
+        },
+        {
+          "Image link": "",
+          "citation": "iNaturalist, observed 20/01/2025",
+          "color": [
+            255,
+            214,
+            41
+          ],
+          "lat": -37.8206283333,
+          "long": 144.8254866667,
+          "preferred_common_name": "false garden mantis",
+          "scientific_name": "Pseudomantis albofimbriata"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0029/127487/Feathery-saltbush.jpg",
+          "citation": "team survey, observed 03/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.81980431547841,
+          "long": 144.8263493878807,
+          "preferred_common_name": "feathery saltbush",
+          "scientific_name": ""
+        },
+        {
+          "Image link": "",
+          "citation": "iNaturalist, observed 08/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.8203885014,
+          "long": 144.8261257325,
+          "preferred_common_name": "fennel",
+          "scientific_name": "Foeniculum vulgare"
+        },
+        {
+          "Image link": "",
+          "citation": "iNaturalist, observed 20/01/2025",
+          "color": [
+            255,
+            214,
+            41
+          ],
+          "lat": -37.82083,
+          "long": 144.82457,
+          "preferred_common_name": "fiddler beetle",
+          "scientific_name": "Eupoecila australasiae"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0014/127400/Field-mustard.jpeg",
+          "citation": "team survey, observed 29/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.81964725841654,
+          "long": 144.8259445656463,
+          "preferred_common_name": "field mustard",
+          "scientific_name": "Brassica rapa"
+        },
+        {
+          "Image link": "",
+          "citation": "iNaturalist, observed 29/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.8193676823,
+          "long": 144.8260673218,
+          "preferred_common_name": "fragrant saltbush",
+          "scientific_name": "Chenopodium parabolicum"
+        },
+        {
+          "Image link": "",
+          "citation": "iNaturalist, observed 29/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.8197093075,
+          "long": 144.8259338656,
+          "preferred_common_name": "fragrant saltbush",
+          "scientific_name": "Chenopodium parabolicum"
+        },
+        {
+          "Image link": "",
+          "citation": "iNaturalist, observed 04/04/2023",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.8204052732,
+          "long": 144.8256362236,
+          "preferred_common_name": "fragrant saltbush",
+          "scientific_name": "Chenopodium parabolicum"
+        },
+        {
+          "Image link": "",
+          "citation": "iNaturalist, observed 03/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.8198687797,
+          "long": 144.8258473896,
+          "preferred_common_name": "fringed willowherb",
+          "scientific_name": "Epilobium ciliatum"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0023/127481/Fumitories.jpg",
+          "citation": "team survey, observed 03/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.82004003546634,
+          "long": 144.8257711384436,
+          "preferred_common_name": "fumitories",
+          "scientific_name": ""
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0023/127481/Fumitories.jpg",
+          "citation": "team survey, observed 08/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.82008610053756,
+          "long": 144.8257675613733,
+          "preferred_common_name": "fumitories",
+          "scientific_name": ""
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0023/127481/Fumitories.jpg",
+          "citation": "team survey, observed 29/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.81978359446353,
+          "long": 144.8260148148976,
+          "preferred_common_name": "fumitories",
+          "scientific_name": ""
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0023/127481/Fumitories.jpg",
+          "citation": "iNaturalist, observed 03/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.819959636,
+          "long": 144.8255597819,
+          "preferred_common_name": "fumitories",
+          "scientific_name": "Fumaria"
+        },
+        {
+          "Image link": "",
+          "citation": "iNaturalist, observed 29/09/2026",
+          "color": [
+            97,
+            97,
+            97
+          ],
+          "lat": -37.8196393562,
+          "long": 144.8258744004,
+          "preferred_common_name": "galium gall mite",
+          "scientific_name": "Cecidophyes rouhollahi"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0018/127404/Great-brome.jpg",
+          "citation": "team survey, observed 29/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.81954317873355,
+          "long": 144.8258289768673,
+          "preferred_common_name": "great brome",
+          "scientific_name": "Bromus diandrus"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0018/127404/Great-brome.jpg",
+          "citation": "iNaturalist, observed 29/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.8194314646,
+          "long": 144.8260396261,
+          "preferred_common_name": "great brome",
+          "scientific_name": "Bromus diandrus"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0019/127405/Great-Egret.jpg",
+          "citation": "",
+          "color": [
+            70,
+            200,
+            240
+          ],
+          "lat": -37.82031821175381,
+          "long": 144.8257927634743,
+          "preferred_common_name": "great egret",
+          "scientific_name": "Ardea alba"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0021/127407/Harlequin-bug_.jpg",
+          "citation": "",
+          "color": [
+            255,
+            214,
+            41
+          ],
+          "lat": -37.82012064938098,
+          "long": 144.8263421769482,
+          "preferred_common_name": "harlequin bug",
+          "scientific_name": "Dindymus versicolor"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0021/127407/Harlequin-bug_.jpg",
+          "citation": "",
+          "color": [
+            255,
+            214,
+            41
+          ],
+          "lat": -37.82001713101725,
+          "long": 144.8265695600609,
+          "preferred_common_name": "harlequin bug",
+          "scientific_name": "Dindymus versicolor"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0017/127421/Poison-hemlock.jpg",
+          "citation": "team survey, observed 29/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.82025061764509,
+          "long": 144.8254838238779,
+          "preferred_common_name": "hemlock",
+          "scientific_name": "Conium maculatum"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0017/127421/Poison-hemlock.jpg",
+          "citation": "team survey, observed 29/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.81989492541396,
+          "long": 144.8260339120878,
+          "preferred_common_name": "hemlock",
+          "scientific_name": "Conium maculatum"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0017/127421/Poison-hemlock.jpg",
+          "citation": "team survey, observed 29/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.81952641941021,
+          "long": 144.8260911780942,
+          "preferred_common_name": "hemlock",
+          "scientific_name": "Conium maculatum"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0022/127408/Honeybee.jpg",
+          "citation": "",
+          "color": [
+            255,
+            214,
+            41
+          ],
+          "lat": -37.82017615185676,
+          "long": 144.8260361767207,
+          "preferred_common_name": "honeybee",
+          "scientific_name": "Apis mellifera"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0022/127408/Honeybee.jpg",
+          "citation": "",
+          "color": [
+            255,
+            214,
+            41
+          ],
+          "lat": -37.8202416390838,
+          "long": 144.8250211253857,
+          "preferred_common_name": "honeybee",
+          "scientific_name": "Apis mellifera"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0022/127408/Honeybee.jpg",
+          "citation": "team survey, observed 08/09/2026",
+          "color": [
+            255,
+            214,
+            41
+          ],
+          "lat": -37.819918515758,
+          "long": 144.8257724795073,
+          "preferred_common_name": "honeybee",
+          "scientific_name": "Apis mellifera"
+        },
+        {
+          "Image link": "",
+          "citation": "team survey, observed 29/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.81937058616883,
+          "long": 144.8262098413581,
+          "preferred_common_name": "hop goodenia",
+          "scientific_name": "Goodenia ovata"
+        },
+        {
+          "Image link": "",
+          "citation": "iNaturalist, observed 29/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.8203909639,
+          "long": 144.824334002,
+          "preferred_common_name": "hop goodenia",
+          "scientific_name": "Goodenia ovata"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0015/127410/House-Sparrow.jpg",
+          "citation": "",
+          "color": [
+            70,
+            200,
+            240
+          ],
+          "lat": -37.81988409628585,
+          "long": 144.8256270686248,
+          "preferred_common_name": "house sparrow",
+          "scientific_name": "Passer domesticus"
+        },
+        {
+          "Image link": "",
+          "citation": "",
+          "color": [
+            255,
+            214,
+            41
+          ],
+          "lat": -37.82002862796665,
+          "long": 144.8263834216334,
+          "preferred_common_name": "ichneumon wasp",
+          "scientific_name": "Species unidentified. "
+        },
+        {
+          "Image link": "",
+          "citation": "iNaturalist, observed 19/06/2024",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.8209133333,
+          "long": 144.826295,
+          "preferred_common_name": "ladder brake",
+          "scientific_name": "Pteris vittata"
+        },
+        {
+          "Image link": "",
+          "citation": "iNaturalist, observed 06/02/2025",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.8198616667,
+          "long": 144.825745,
+          "preferred_common_name": "lesser canary grass",
+          "scientific_name": "Phalaris minor"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0018/127413/Little-Raven.jpg",
+          "citation": "",
+          "color": [
+            70,
+            200,
+            240
+          ],
+          "lat": -37.81998339848077,
+          "long": 144.8255327756299,
+          "preferred_common_name": "little raven",
+          "scientific_name": "Corvus mellori"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0021/127416/Milk-thistle.jpg",
+          "citation": "team survey, observed 29/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.81971117560877,
+          "long": 144.8259816470789,
+          "preferred_common_name": "milk thistle",
+          "scientific_name": "Silybum marianum"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0021/127416/Milk-thistle.jpg",
+          "citation": "iNaturalist, observed 29/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.8197065183,
+          "long": 144.8258724904,
+          "preferred_common_name": "milk thistle",
+          "scientific_name": "Silybum marianum"
+        },
+        {
+          "Image link": "",
+          "citation": "iNaturalist, observed 17/01/2025",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.8194765281,
+          "long": 144.8246988792,
+          "preferred_common_name": "moth vine",
+          "scientific_name": "Araujia sericifera"
+        },
+        {
+          "Image link": "",
+          "citation": "iNaturalist, observed 15/04/2025",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.8207434,
+          "long": 144.8255178,
+          "preferred_common_name": "native broom",
+          "scientific_name": "Viminaria juncea"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0024/127419/New-Holland-Honeyeater.jpg",
+          "citation": "",
+          "color": [
+            70,
+            200,
+            240
+          ],
+          "lat": -37.81999432135186,
+          "long": 144.8266540095137,
+          "preferred_common_name": "new holland honeyeater",
+          "scientific_name": "Phylidonyris novaehollandiae"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0020/127451/Wild-oat.jpg",
+          "citation": "team survey, observed 29/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.81961423622369,
+          "long": 144.8260234063986,
+          "preferred_common_name": "oat grass 'wild oat'",
+          "scientific_name": "Avena fatua"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0016/127420/Onion-weed.jpg",
+          "citation": "team survey, observed 03/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.81999292549097,
+          "long": 144.8265385903301,
+          "preferred_common_name": "onion weed",
+          "scientific_name": "Asphodelus fistulosus"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0016/127420/Onion-weed.jpg",
+          "citation": "team survey, observed 29/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.81965808878603,
+          "long": 144.8259113390531,
+          "preferred_common_name": "onion weed",
+          "scientific_name": "Asphodelus fistulosus"
+        },
+        {
+          "Image link": "",
+          "citation": "iNaturalist, observed 29/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.8197832544,
+          "long": 144.8258807039,
+          "preferred_common_name": "onion-leafed asphodel",
+          "scientific_name": "Asphodelus fistulosus"
+        },
+        {
+          "Image link": "",
+          "citation": "iNaturalist, observed 03/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.82016523,
+          "long": 144.8263088828,
+          "preferred_common_name": "onion-leafed asphodel",
+          "scientific_name": "Asphodelus fistulosus"
+        },
+        {
+          "Image link": "",
+          "citation": "team survey, observed 03/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.82030304041131,
+          "long": 144.8260482830456,
+          "preferred_common_name": "plum/cherry tree",
+          "scientific_name": ""
+        },
+        {
+          "Image link": "",
+          "citation": "iNaturalist, observed 03/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.8203153378,
+          "long": 144.8260387873,
+          "preferred_common_name": "plums, cherries, and allies",
+          "scientific_name": "Prunus"
+        },
+        {
+          "Image link": "",
+          "citation": "iNaturalist, observed 29/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.8194301669,
+          "long": 144.8260452413,
+          "preferred_common_name": "poison hemlock",
+          "scientific_name": "Conium maculatum"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0019/127612/Pomegranate.jpg",
+          "citation": "team survey, observed 03/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.8202553825048,
+          "long": 144.8259563365906,
+          "preferred_common_name": "pomegranate",
+          "scientific_name": ""
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0018/127422/Prickly-currant-bush.jpg",
+          "citation": "",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.82017598535177,
+          "long": 144.8261146851479,
+          "preferred_common_name": "prickly currant-bush",
+          "scientific_name": "Coprosma quadrifida"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0018/127422/Prickly-currant-bush.jpg",
+          "citation": "",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.82017045813775,
+          "long": 144.8261714959602,
+          "preferred_common_name": "prickly currant-bush",
+          "scientific_name": "Coprosma quadrifida"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0018/127422/Prickly-currant-bush.jpg",
+          "citation": "",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.82016167008758,
+          "long": 144.8262297841148,
+          "preferred_common_name": "prickly currant-bush",
+          "scientific_name": "Coprosma quadrifida"
+        },
+        {
+          "Image link": "",
+          "citation": "iNaturalist, observed 23/01/2026",
+          "color": [
+            255,
+            214,
+            41
+          ],
+          "lat": -37.820546346,
+          "long": 144.8254364427,
+          "preferred_common_name": "pterolocera moth",
+          "scientific_name": "Pterolocera"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0019/127423/Purple-swamphen_-nath77w_original.jpg",
+          "citation": "",
+          "color": [
+            70,
+            200,
+            240
+          ],
+          "lat": -37.8195778823105,
+          "long": 144.8262563177975,
+          "preferred_common_name": "purple swamp hen",
+          "scientific_name": "Porphyrio porphyrio"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0019/127423/Purple-swamphen_-nath77w_original.jpg",
+          "citation": "",
+          "color": [
+            70,
+            200,
+            240
+          ],
+          "lat": -37.8196326139162,
+          "long": 144.8261735362688,
+          "preferred_common_name": "purple swamp hen",
+          "scientific_name": "Porphyrio porphyrio"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0020/127424/Rabbit.jpg",
+          "citation": "",
+          "color": [
+            235,
+            123,
+            190
+          ],
+          "lat": -37.81955658767448,
+          "long": 144.826742842712,
+          "preferred_common_name": "rabbit",
+          "scientific_name": "Oryctolagus cuniculus"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0020/127424/Rabbit.jpg",
+          "citation": "",
+          "color": [
+            235,
+            123,
+            190
+          ],
+          "lat": -37.81957871706424,
+          "long": 144.8267421935787,
+          "preferred_common_name": "rabbit",
+          "scientific_name": "Oryctolagus cuniculus"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0020/127424/Rabbit.jpg",
+          "citation": "",
+          "color": [
+            235,
+            123,
+            190
+          ],
+          "lat": -37.81957817821724,
+          "long": 144.8267701209872,
+          "preferred_common_name": "rabbit",
+          "scientific_name": "Oryctolagus cuniculus"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0020/127424/Rabbit.jpg",
+          "citation": "",
+          "color": [
+            235,
+            123,
+            190
+          ],
+          "lat": -37.81994701145037,
+          "long": 144.8257890366181,
+          "preferred_common_name": "rabbit",
+          "scientific_name": "Oryctolagus cuniculus"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0020/127424/Rabbit.jpg",
+          "citation": "",
+          "color": [
+            235,
+            123,
+            190
+          ],
+          "lat": -37.82010224104972,
+          "long": 144.8260875234631,
+          "preferred_common_name": "rabbit",
+          "scientific_name": "Oryctolagus cuniculus"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0021/127425/Rainbow-Lorikeet.jpg",
+          "citation": "",
+          "color": [
+            70,
+            200,
+            240
+          ],
+          "lat": -37.81994095238323,
+          "long": 144.8268231355846,
+          "preferred_common_name": "rainbow lorikeet",
+          "scientific_name": "Trichoglossus moluccanus"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0021/127425/Rainbow-Lorikeet.jpg",
+          "citation": "",
+          "color": [
+            70,
+            200,
+            240
+          ],
+          "lat": -37.81990796589463,
+          "long": 144.8255994769223,
+          "preferred_common_name": "rainbow lorikeet",
+          "scientific_name": "Trichoglossus moluccanus"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0022/127426/Red-wattle-bird.jpg",
+          "citation": "",
+          "color": [
+            70,
+            200,
+            240
+          ],
+          "lat": -37.81990762684666,
+          "long": 144.82565462121,
+          "preferred_common_name": "red wattle bird",
+          "scientific_name": "Anthochaera carunculata"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0023/127427/Red-browed-finch.jpg",
+          "citation": "",
+          "color": [
+            70,
+            200,
+            240
+          ],
+          "lat": -37.82035007648638,
+          "long": 144.8261480372136,
+          "preferred_common_name": "red-browed finch",
+          "scientific_name": "Neochmia temporalis"
+        },
+        {
+          "Image link": "",
+          "citation": "team survey, observed 03/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.8199522047023,
+          "long": 144.825992592847,
+          "preferred_common_name": "reeds",
+          "scientific_name": ""
+        },
+        {
+          "Image link": "",
+          "citation": "team survey, observed 03/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.81976027786489,
+          "long": 144.8262460699202,
+          "preferred_common_name": "reeds",
+          "scientific_name": ""
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0021/127506/Ribwort-plantain.jpg",
+          "citation": "iNaturalist, observed 29/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.8196922396,
+          "long": 144.8259234947,
+          "preferred_common_name": "ribwort plantain",
+          "scientific_name": "Plantago lanceolata"
+        },
+        {
+          "Image link": "",
+          "citation": "iNaturalist, observed 13/06/2024",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.8205789,
+          "long": 144.8246435,
+          "preferred_common_name": "river red gum",
+          "scientific_name": "Eucalyptus camaldulensis"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0024/127428/Rough-cranes-bill.jpg",
+          "citation": "team survey, observed 29/09/2026",
+          "color": [
+            70,
+            200,
+            240
+          ],
+          "lat": -37.81950711444669,
+          "long": 144.8260673716996,
+          "preferred_common_name": "rough crane\u2019s-bill",
+          "scientific_name": "Geranium gardneri"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0024/127428/Rough-cranes-bill.jpg",
+          "citation": "team survey, observed 29/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.81963497658364,
+          "long": 144.8259770295047,
+          "preferred_common_name": "rough crane\u2019s-bill",
+          "scientific_name": "Geranium gardneri"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0023/127490/Australian-rush.jpg",
+          "citation": "",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.81981080939935,
+          "long": 144.8262295368918,
+          "preferred_common_name": "rushes",
+          "scientific_name": "Juncus sp"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0023/127490/Australian-rush.jpg",
+          "citation": "",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.8197909924743,
+          "long": 144.8263274790746,
+          "preferred_common_name": "rushes",
+          "scientific_name": "Juncus sp"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0023/127490/Australian-rush.jpg",
+          "citation": "",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.81966479655663,
+          "long": 144.8265200610917,
+          "preferred_common_name": "rushes",
+          "scientific_name": "Juncus sp"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0023/127490/Australian-rush.jpg",
+          "citation": "",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.81958466253823,
+          "long": 144.8266139307954,
+          "preferred_common_name": "rushes",
+          "scientific_name": "Juncus sp"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0023/127490/Australian-rush.jpg",
+          "citation": "",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.81944341922835,
+          "long": 144.8264934530276,
+          "preferred_common_name": "rushes",
+          "scientific_name": "Juncus sp"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0023/127490/Australian-rush.jpg",
+          "citation": "",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.8194711350647,
+          "long": 144.8264050156441,
+          "preferred_common_name": "rushes",
+          "scientific_name": "Juncus sp"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0023/127490/Australian-rush.jpg",
+          "citation": "",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.81952211595315,
+          "long": 144.8263217372394,
+          "preferred_common_name": "rushes",
+          "scientific_name": "Juncus sp"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0023/127490/Australian-rush.jpg",
+          "citation": "",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.81957460466842,
+          "long": 144.8262364672701,
+          "preferred_common_name": "rushes",
+          "scientific_name": "Juncus sp"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0023/127490/Australian-rush.jpg",
+          "citation": "",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.81960382819143,
+          "long": 144.8261460381871,
+          "preferred_common_name": "rushes",
+          "scientific_name": "Juncus sp"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0023/127490/Australian-rush.jpg",
+          "citation": "",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.81967850523204,
+          "long": 144.8260912723181,
+          "preferred_common_name": "rushes",
+          "scientific_name": "Juncus sp"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0023/127490/Australian-rush.jpg",
+          "citation": "",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.81974216126362,
+          "long": 144.8261088766254,
+          "preferred_common_name": "rushes",
+          "scientific_name": "Juncus sp"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0023/127490/Australian-rush.jpg",
+          "citation": "",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.81984262127516,
+          "long": 144.8263629614228,
+          "preferred_common_name": "rushes",
+          "scientific_name": "Juncus sp"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0023/127490/Australian-rush.jpg",
+          "citation": "team survey, observed 29/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.81969920074933,
+          "long": 144.8257968199857,
+          "preferred_common_name": "rushes",
+          "scientific_name": ""
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0023/127490/Australian-rush.jpg",
+          "citation": "team survey, observed 29/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.81945311442552,
+          "long": 144.8259515354158,
+          "preferred_common_name": "rushes",
+          "scientific_name": "Juncus sp"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0023/127490/Australian-rush.jpg",
+          "citation": "team survey, observed 29/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.81949223096019,
+          "long": 144.826340283836,
+          "preferred_common_name": "rushes",
+          "scientific_name": "Juncus sp"
+        },
+        {
+          "Image link": "",
+          "citation": "iNaturalist, observed 30/03/2026",
+          "color": [
+            255,
+            214,
+            41
+          ],
+          "lat": -37.8185247997,
+          "long": 144.8242255,
+          "preferred_common_name": "sawfly sp.",
+          "scientific_name": "Perga"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0025/127429/Scarlet-pimpernell.jpg",
+          "citation": "team survey, observed 29/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.82008751466826,
+          "long": 144.825870418713,
+          "preferred_common_name": "scarlett pimpernell",
+          "scientific_name": "Lysimachia arvensis"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0025/127429/Scarlet-pimpernell.jpg",
+          "citation": "team survey, observed 29/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.81996210737804,
+          "long": 144.8259256527766,
+          "preferred_common_name": "scarlett pimpernell",
+          "scientific_name": "Lysimachia arvensis"
+        },
+        {
+          "Image link": "",
+          "citation": "iNaturalist, observed 03/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.8190459564,
+          "long": 144.8273881361,
+          "preferred_common_name": "seaberry saltbush",
+          "scientific_name": "Rhagodia candolleana"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0017/127430/She-oaks.jpg",
+          "citation": "",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.81974859509554,
+          "long": 144.8266246994762,
+          "preferred_common_name": "she-oaks casuarinas",
+          "scientific_name": "Allocasuarina verticillata"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0017/127430/She-oaks.jpg",
+          "citation": "",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.81989069533397,
+          "long": 144.826373234283,
+          "preferred_common_name": "she-oaks casuarinas",
+          "scientific_name": "Allocasuarina verticillata"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0017/127430/She-oaks.jpg",
+          "citation": "",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.81989568491014,
+          "long": 144.8263088297144,
+          "preferred_common_name": "she-oaks casuarinas",
+          "scientific_name": "Allocasuarina verticillata"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0018/127431/Silver-gull.jpg",
+          "citation": "",
+          "color": [
+            70,
+            200,
+            240
+          ],
+          "lat": -37.81965596473229,
+          "long": 144.8263001688342,
+          "preferred_common_name": "silver gull",
+          "scientific_name": "Chroicocephalus novaehollandiae"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0018/127431/Silver-gull.jpg",
+          "citation": "",
+          "color": [
+            70,
+            200,
+            240
+          ],
+          "lat": -37.81981310583718,
+          "long": 144.8264785318559,
+          "preferred_common_name": "silver gull",
+          "scientific_name": "Chroicocephalus novaehollandiae"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0019/127432/Silver-wattle.jpg",
+          "citation": "team survey, observed 03/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.81989381231732,
+          "long": 144.8257602150349,
+          "preferred_common_name": "silver wattle",
+          "scientific_name": "Acacia dealbata"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0019/127432/Silver-wattle.jpg",
+          "citation": "iNaturalist, observed 03/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.8198714289,
+          "long": 144.825843736,
+          "preferred_common_name": "silver wattle",
+          "scientific_name": "Acacia dealbata"
+        },
+        {
+          "Image link": "",
+          "citation": "iNaturalist, observed 29/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.8197094532,
+          "long": 144.8259229636,
+          "preferred_common_name": "slender wild oat",
+          "scientific_name": "Avena barbata"
+        },
+        {
+          "Image link": "",
+          "citation": "",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.82005580318958,
+          "long": 144.8265189138381,
+          "preferred_common_name": "small-leaved old man's beard",
+          "scientific_name": "Clematis microphylla"
+        },
+        {
+          "Image link": "",
+          "citation": "",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.81998172959531,
+          "long": 144.8266107546347,
+          "preferred_common_name": "small-leaved old man's beard",
+          "scientific_name": "Clematis microphylla"
+        },
+        {
+          "Image link": "",
+          "citation": "",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.81990948909554,
+          "long": 144.8267181358397,
+          "preferred_common_name": "small-leaved old man's beard",
+          "scientific_name": "Clematis microphylla"
+        },
+        {
+          "Image link": "",
+          "citation": "iNaturalist, observed 04/06/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.8207313735,
+          "long": 144.8257809599,
+          "preferred_common_name": "spiny rush",
+          "scientific_name": "Juncus acutus"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0021/127434/Spotted-dove.jpg",
+          "citation": "",
+          "color": [
+            70,
+            200,
+            240
+          ],
+          "lat": -37.82009007556032,
+          "long": 144.825542935943,
+          "preferred_common_name": "spotted dove",
+          "scientific_name": "Spilopelia chinensis"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0023/127436/Spotted-pardalote_original_Jo-Davey.jpg",
+          "citation": "",
+          "color": [
+            70,
+            200,
+            240
+          ],
+          "lat": -37.82024072896473,
+          "long": 144.8263214331444,
+          "preferred_common_name": "spotted pardalote",
+          "scientific_name": "Pardalotus punctatus"
+        },
+        {
+          "Image link": "",
+          "citation": "iNaturalist, observed 03/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.8201077132,
+          "long": 144.8262040058,
+          "preferred_common_name": "stork's-bills",
+          "scientific_name": "Erodium"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0024/127437/Storksbill.jpg",
+          "citation": "team survey, observed 03/09/2026",
+          "color": [
+            70,
+            200,
+            240
+          ],
+          "lat": -37.82006331126983,
+          "long": 144.8264785873607,
+          "preferred_common_name": "storksbill",
+          "scientific_name": "Erodium malacoides"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0025/127438/Striped-marsh-frog.jpg",
+          "citation": "",
+          "color": [
+            159,
+            184,
+            37
+          ],
+          "lat": -37.81965730479547,
+          "long": 144.8260919459192,
+          "preferred_common_name": "striped marsh frog",
+          "scientific_name": "Limnodynastes peronii"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0025/127438/Striped-marsh-frog.jpg",
+          "citation": "",
+          "color": [
+            159,
+            184,
+            37
+          ],
+          "lat": -37.81970411384039,
+          "long": 144.8260735909347,
+          "preferred_common_name": "striped marsh frog",
+          "scientific_name": "Limnodynastes peronii"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0025/127438/Striped-marsh-frog.jpg",
+          "citation": "team survey, observed 03/09/2026",
+          "color": [
+            159,
+            184,
+            37
+          ],
+          "lat": -37.81970730329509,
+          "long": 144.8261988736812,
+          "preferred_common_name": "striped marsh frog",
+          "scientific_name": "Limnodynastes peronii"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0025/127438/Striped-marsh-frog.jpg",
+          "citation": "",
+          "color": [
+            159,
+            184,
+            37
+          ],
+          "lat": -37.81958966265166,
+          "long": 144.8263502432317,
+          "preferred_common_name": "striped marsh frog",
+          "scientific_name": "Limnodynastes peronii"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0025/127438/Striped-marsh-frog.jpg",
+          "citation": "team survey, observed 08/09/2026",
+          "color": [
+            159,
+            184,
+            37
+          ],
+          "lat": -37.81955410481165,
+          "long": 144.8263940657068,
+          "preferred_common_name": "striped marsh frog",
+          "scientific_name": "Limnodynastes peronii"
+        },
+        {
+          "Image link": "",
+          "citation": "",
+          "color": [
+            70,
+            200,
+            240
+          ],
+          "lat": -37.81974309541165,
+          "long": 144.8259372374313,
+          "preferred_common_name": "superb fairy wren",
+          "scientific_name": "Malurus cyaneus"
+        },
+        {
+          "Image link": "",
+          "citation": "",
+          "color": [
+            70,
+            200,
+            240
+          ],
+          "lat": -37.8200059045976,
+          "long": 144.8260092732345,
+          "preferred_common_name": "superb fairy wren",
+          "scientific_name": "Malurus cyaneus"
+        },
+        {
+          "Image link": "",
+          "citation": "iNaturalist, observed 14/12/2023",
+          "color": [
+            235,
+            123,
+            190
+          ],
+          "lat": -37.8195761027,
+          "long": 144.8247428611,
+          "preferred_common_name": "swamp wallaby",
+          "scientific_name": "Wallabia bicolor"
+        },
+        {
+          "Image link": "",
+          "citation": "team survey, observed 29/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.82020149262545,
+          "long": 144.8257287333861,
+          "preferred_common_name": "three cornered leek",
+          "scientific_name": "Allium triquetrum\n"
+        },
+        {
+          "Image link": "",
+          "citation": "team survey, observed 29/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.81990075377209,
+          "long": 144.8259983117739,
+          "preferred_common_name": "three cornered leek",
+          "scientific_name": "Allium triquetrum\n"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0020/127442/Tiger-snake.jpg",
+          "citation": "",
+          "color": [
+            159,
+            184,
+            37
+          ],
+          "lat": -37.82040620941011,
+          "long": 144.8255336572462,
+          "preferred_common_name": "tiger snake",
+          "scientific_name": "Notechis scutatus"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0020/127442/Tiger-snake.jpg",
+          "citation": "iNaturalist, observed 09/01/2024",
+          "color": [
+            159,
+            184,
+            37
+          ],
+          "lat": -37.8203923656,
+          "long": 144.8248347268,
+          "preferred_common_name": "tiger snake",
+          "scientific_name": "Notechis scutatus"
+        },
+        {
+          "Image link": "",
+          "citation": "iNaturalist, observed 22/01/2025",
+          "color": [
+            255,
+            214,
+            41
+          ],
+          "lat": -37.8202302546,
+          "long": 144.824183062,
+          "preferred_common_name": "umbrella paper wasps",
+          "scientific_name": "Polistes"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0022/127417/Moss.jpg",
+          "citation": "",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.82033836268951,
+          "long": 144.8260049130926,
+          "preferred_common_name": "unidentified moss",
+          "scientific_name": ""
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0022/127417/Moss.jpg",
+          "citation": "",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.82033681599673,
+          "long": 144.8260008920572,
+          "preferred_common_name": "unidentified moss",
+          "scientific_name": ""
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0022/127417/Moss.jpg",
+          "citation": "",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.81980073581222,
+          "long": 144.8260636146096,
+          "preferred_common_name": "unidentified moss",
+          "scientific_name": ""
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0022/127417/Moss.jpg",
+          "citation": "team survey, observed 08/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.81983821980192,
+          "long": 144.8261139635575,
+          "preferred_common_name": "unidentified moss",
+          "scientific_name": ""
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0022/127417/Moss.jpg",
+          "citation": "team survey, observed 08/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.81995402405765,
+          "long": 144.8259990713976,
+          "preferred_common_name": "unidentified moss",
+          "scientific_name": ""
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0024/127482/Water-ribbons.jpg",
+          "citation": "team survey, observed 03/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.81982609195764,
+          "long": 144.8260767627838,
+          "preferred_common_name": "water ribbons",
+          "scientific_name": "Cycnogeton"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0024/127482/Water-ribbons.jpg",
+          "citation": "iNaturalist, observed 03/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.819870594,
+          "long": 144.8261436449,
+          "preferred_common_name": "water ribbons",
+          "scientific_name": "Cycnogeton"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0024/127446/Welcome-Swallow.jpg",
+          "citation": "",
+          "color": [
+            70,
+            200,
+            240
+          ],
+          "lat": -37.81959190275116,
+          "long": 144.8264895331473,
+          "preferred_common_name": "welcome swallow",
+          "scientific_name": "Hirundo neoxena"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0024/127446/Welcome-Swallow.jpg",
+          "citation": "",
+          "color": [
+            70,
+            200,
+            240
+          ],
+          "lat": -37.81988650384268,
+          "long": 144.8255924236345,
+          "preferred_common_name": "welcome swallow",
+          "scientific_name": "Hirundo neoxena"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0026/127448/White-Ibis.jpg",
+          "citation": "",
+          "color": [
+            70,
+            200,
+            240
+          ],
+          "lat": -37.81952543774295,
+          "long": 144.826536416935,
+          "preferred_common_name": "white ibis",
+          "scientific_name": "Threskiornis moluccus"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0026/127448/White-Ibis.jpg",
+          "citation": "",
+          "color": [
+            70,
+            200,
+            240
+          ],
+          "lat": -37.81966392615546,
+          "long": 144.826731719335,
+          "preferred_common_name": "white ibis",
+          "scientific_name": "Threskiornis moluccus"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0026/127448/White-Ibis.jpg",
+          "citation": "",
+          "color": [
+            70,
+            200,
+            240
+          ],
+          "lat": -37.81942111463558,
+          "long": 144.8266577654877,
+          "preferred_common_name": "white ibis",
+          "scientific_name": "Threskiornis moluccus"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0026/127448/White-Ibis.jpg",
+          "citation": "",
+          "color": [
+            70,
+            200,
+            240
+          ],
+          "lat": -37.81940989021901,
+          "long": 144.8266208793663,
+          "preferred_common_name": "white ibis",
+          "scientific_name": "Threskiornis moluccus"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0026/127448/White-Ibis.jpg",
+          "citation": "",
+          "color": [
+            70,
+            200,
+            240
+          ],
+          "lat": -37.8198045414326,
+          "long": 144.8264670854638,
+          "preferred_common_name": "white ibis",
+          "scientific_name": "Threskiornis moluccus"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0026/127448/White-Ibis.jpg",
+          "citation": "",
+          "color": [
+            70,
+            200,
+            240
+          ],
+          "lat": -37.81981244608686,
+          "long": 144.8264427948503,
+          "preferred_common_name": "white ibis",
+          "scientific_name": "Threskiornis moluccus"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0026/127448/White-Ibis.jpg",
+          "citation": "team survey, observed 08/09/2026",
+          "color": [
+            70,
+            200,
+            240
+          ],
+          "lat": -37.82006206538468,
+          "long": 144.8262517765785,
+          "preferred_common_name": "white ibis",
+          "scientific_name": "Threskiornis moluccus"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0026/127448/White-Ibis.jpg",
+          "citation": "team survey, observed 08/09/2026",
+          "color": [
+            70,
+            200,
+            240
+          ],
+          "lat": -37.81951771733169,
+          "long": 144.8266874116177,
+          "preferred_common_name": "white ibis",
+          "scientific_name": "Threskiornis moluccus"
+        },
+        {
+          "Image link": "",
+          "citation": "iNaturalist, observed 10/06/2025",
+          "color": [
+            97,
+            97,
+            97
+          ],
+          "lat": -37.8193454997,
+          "long": 144.8265486997,
+          "preferred_common_name": "white porch spider",
+          "scientific_name": "Cryptachaea gigantipes"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0027/127449/White-plumed-honeyeater.jpg",
+          "citation": "",
+          "color": [
+            70,
+            200,
+            240
+          ],
+          "lat": -37.81999529014152,
+          "long": 144.8258341393822,
+          "preferred_common_name": "white-plumed honeyeater",
+          "scientific_name": "Lichenostomus penicillatus"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0027/127449/White-plumed-honeyeater.jpg",
+          "citation": "",
+          "color": [
+            70,
+            200,
+            240
+          ],
+          "lat": -37.8200947800909,
+          "long": 144.8265756601572,
+          "preferred_common_name": "white-plumed honeyeater",
+          "scientific_name": "Lichenostomus penicillatus"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0019/127450/Wild-fennel.jpg",
+          "citation": "team survey, observed 29/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.81942761540305,
+          "long": 144.8257718472766,
+          "preferred_common_name": "wild fennel",
+          "scientific_name": "Foeniculum vulgare"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0019/127450/Wild-fennel.jpg",
+          "citation": "team survey, observed 08/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.82025180273988,
+          "long": 144.8258602562475,
+          "preferred_common_name": "wild fennel",
+          "scientific_name": "Foeniculum vulgare"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0019/127450/Wild-fennel.jpg",
+          "citation": "team survey, observed 29/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.81956318221411,
+          "long": 144.8260593129084,
+          "preferred_common_name": "wild fennel",
+          "scientific_name": "Foeniculum vulgare"
+        },
+        {
+          "Image link": "",
+          "citation": "iNaturalist, observed 29/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.8193693622,
+          "long": 144.8260652135,
+          "preferred_common_name": "wild oat",
+          "scientific_name": "Avena fatua"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0021/127452/Willow-herb.jpeg",
+          "citation": "team survey, observed 29/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.82002670747173,
+          "long": 144.8257703869153,
+          "preferred_common_name": "willowherb",
+          "scientific_name": "?Epilobium hirsutum"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0021/127452/Willow-herb.jpeg",
+          "citation": "team survey, observed 29/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.8199718547785,
+          "long": 144.8258681347558,
+          "preferred_common_name": "willowherb",
+          "scientific_name": "?Epilobium hirsutum"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0021/127452/Willow-herb.jpeg",
+          "citation": "team survey, observed 03/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.82003861096447,
+          "long": 144.8257631332973,
+          "preferred_common_name": "willowherb",
+          "scientific_name": "?Epilobium hirsutum"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0022/127453/Willy-Wagtail.jpg",
+          "citation": "",
+          "color": [
+            70,
+            200,
+            240
+          ],
+          "lat": -37.82005043685006,
+          "long": 144.8262511976867,
+          "preferred_common_name": "willy wagtail",
+          "scientific_name": "Rhipidura leucophrys"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0023/127454/Yellow-Box.jpg",
+          "citation": "team survey, observed 29/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.81958828243247,
+          "long": 144.8258773098649,
+          "preferred_common_name": "yellow box",
+          "scientific_name": "Eucalyptus melliodora"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0024/127455/Yelloweye-woodsorrel.jpg",
+          "citation": "team survey, observed 29/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.8198222550924,
+          "long": 144.8259156999468,
+          "preferred_common_name": "yellow-eye wood sorrel",
+          "scientific_name": "Oxalis obtusa"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0024/127455/Yelloweye-woodsorrel.jpg",
+          "citation": "",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.82022265530436,
+          "long": 144.824983266608,
+          "preferred_common_name": "yellow-eye wood sorrel",
+          "scientific_name": "Oxalis obtusa"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0024/127455/Yelloweye-woodsorrel.jpg",
+          "citation": "team survey, observed 29/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.81941055305869,
+          "long": 144.8259951074478,
+          "preferred_common_name": "yellow-eye wood sorrel",
+          "scientific_name": "Oxalis obtusa"
+        },
+        {
+          "Image link": "https://pursuit.unimelb.edu.au/__data/assets/image/0024/127455/Yelloweye-woodsorrel.jpg",
+          "citation": "team survey, observed 29/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.81981691429454,
+          "long": 144.8259218935632,
+          "preferred_common_name": "yellow-eye wood sorrel",
+          "scientific_name": "Oxalis obtusa"
+        },
+        {
+          "Image link": "",
+          "citation": "iNaturalist, observed 28/10/2018",
+          "color": [
+            70,
+            200,
+            240
+          ],
+          "lat": -37.8211767366,
+          "long": 144.8259484458,
+          "preferred_common_name": "yellow-rumped thornbill",
+          "scientific_name": "Acanthiza chrysorrhoa"
+        },
+        {
+          "Image link": "",
+          "citation": "",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.81983269945044,
+          "long": 144.8254983784586,
+          "preferred_common_name": "",
+          "scientific_name": ""
+        },
+        {
+          "Image link": "",
+          "citation": "",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.81973190306862,
+          "long": 144.8255689916673,
+          "preferred_common_name": "",
+          "scientific_name": ""
+        },
+        {
+          "Image link": "",
+          "citation": "",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.81979372691417,
+          "long": 144.8255853284586,
+          "preferred_common_name": "",
+          "scientific_name": ""
+        },
+        {
+          "Image link": "",
+          "citation": "",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.81974963863514,
+          "long": 144.8254661638853,
+          "preferred_common_name": "",
+          "scientific_name": ""
+        },
+        {
+          "Image link": "",
+          "citation": "",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.81995802241445,
+          "long": 144.8256217595025,
+          "preferred_common_name": "",
+          "scientific_name": ""
+        },
+        {
+          "Image link": "",
+          "citation": "",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.81992224069904,
+          "long": 144.8255271026557,
+          "preferred_common_name": "",
+          "scientific_name": ""
+        },
+        {
+          "Image link": "",
+          "citation": "",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.82010333482657,
+          "long": 144.8257643558134,
+          "preferred_common_name": "",
+          "scientific_name": ""
+        },
+        {
+          "Image link": "",
+          "citation": "",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.82028670354645,
+          "long": 144.8262938176123,
+          "preferred_common_name": "",
+          "scientific_name": ""
+        },
+        {
+          "Image link": "",
+          "citation": "",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.82021461048966,
+          "long": 144.8264258102722,
+          "preferred_common_name": "",
+          "scientific_name": ""
+        },
+        {
+          "Image link": "",
+          "citation": "",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.82011885107273,
+          "long": 144.8265819854067,
+          "preferred_common_name": "",
+          "scientific_name": ""
+        },
+        {
+          "Image link": "",
+          "citation": "",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.82005605987963,
+          "long": 144.8263320868979,
+          "preferred_common_name": "",
+          "scientific_name": ""
+        },
+        {
+          "Image link": "",
+          "citation": "",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.82001030769609,
+          "long": 144.8262578977905,
+          "preferred_common_name": "",
+          "scientific_name": ""
+        },
+        {
+          "Image link": "",
+          "citation": "",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.82024690755708,
+          "long": 144.82629611769,
+          "preferred_common_name": "",
+          "scientific_name": ""
+        },
+        {
+          "Image link": "",
+          "citation": "",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.82008847187391,
+          "long": 144.8265339550139,
+          "preferred_common_name": "",
+          "scientific_name": ""
+        },
+        {
+          "Image link": "",
+          "citation": "",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.81997846247702,
+          "long": 144.8266949685404,
+          "preferred_common_name": "",
+          "scientific_name": ""
+        },
+        {
+          "Image link": "",
+          "citation": "",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.81993168431524,
+          "long": 144.8268611085482,
+          "preferred_common_name": "",
+          "scientific_name": ""
+        },
+        {
+          "Image link": "",
+          "citation": "",
+          "color": [
+            255,
+            214,
+            41
+          ],
+          "lat": -37.81980978880747,
+          "long": 144.82617917184,
+          "preferred_common_name": "",
+          "scientific_name": ""
+        },
+        {
+          "Image link": "",
+          "citation": "team survey, observed 29/09/2026",
+          "color": [
+            70,
+            200,
+            240
+          ],
+          "lat": -37.81951211984703,
+          "long": 144.8257487781359,
+          "preferred_common_name": "",
+          "scientific_name": ""
+        },
+        {
+          "Image link": "",
+          "citation": "team survey, observed 29/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.81985209657867,
+          "long": 144.8257885823655,
+          "preferred_common_name": "",
+          "scientific_name": ""
+        },
+        {
+          "Image link": "",
+          "citation": "team survey, observed 29/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.81984261725422,
+          "long": 144.8256626186886,
+          "preferred_common_name": "",
+          "scientific_name": ""
+        },
+        {
+          "Image link": "",
+          "citation": "team survey, observed 29/09/2026",
+          "color": [
+            70,
+            200,
+            240
+          ],
+          "lat": -37.81993165329173,
+          "long": 144.8258358427099,
+          "preferred_common_name": "",
+          "scientific_name": ""
+        },
+        {
+          "Image link": "",
+          "citation": "team survey, observed 29/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.82029762188985,
+          "long": 144.825220941646,
+          "preferred_common_name": "",
+          "scientific_name": ""
+        },
+        {
+          "Image link": "",
+          "citation": "team survey, observed 29/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.8195011236126,
+          "long": 144.8260152249657,
+          "preferred_common_name": "",
+          "scientific_name": ""
+        },
+        {
+          "Image link": "",
+          "citation": "team survey, observed 29/09/2026",
+          "color": [
+            255,
+            214,
+            41
+          ],
+          "lat": -37.8195205475201,
+          "long": 144.8257422267331,
+          "preferred_common_name": "",
+          "scientific_name": ""
+        },
+        {
+          "Image link": "",
+          "citation": "team survey, observed 29/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.81939361966172,
+          "long": 144.8261554500753,
+          "preferred_common_name": "",
+          "scientific_name": ""
+        },
+        {
+          "Image link": "",
+          "citation": "team survey, observed 29/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.82014136376193,
+          "long": 144.8263134168751,
+          "preferred_common_name": "",
+          "scientific_name": ""
+        },
+        {
+          "Image link": "",
+          "citation": "team survey, observed 29/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.81952294491649,
+          "long": 144.8259808109715,
+          "preferred_common_name": "",
+          "scientific_name": ""
+        },
+        {
+          "Image link": "",
+          "citation": "team survey, observed 29/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.81955069178275,
+          "long": 144.8259274786704,
+          "preferred_common_name": "",
+          "scientific_name": ""
+        },
+        {
+          "Image link": "",
+          "citation": "team survey, observed 29/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.81957650551441,
+          "long": 144.8260806536024,
+          "preferred_common_name": "",
+          "scientific_name": ""
+        },
+        {
+          "Image link": "",
+          "citation": "team survey, observed 29/09/2026",
+          "color": [
+            97,
+            113,
+            86
+          ],
+          "lat": -37.81960427046358,
+          "long": 144.8259979740596,
+          "preferred_common_name": "",
+          "scientific_name": ""
+        }
+      ],
+      "getFillColor": "@@=color",
+      "getPosition": "@@=[long, lat]",
+      "getRadius": 1.5,
+      "id": "6fecc795-847f-444f-ad0e-8bb77276b0ad",
+      "pickable": true
+    }
+  ],
+  "mapProvider": "carto",
+  "mapStyle": "https://basemaps.cartocdn.com/gl/voyager-gl-style/style.json",
+  "views": [
+    {
+      "@@type": "MapView",
+      "controller": true
+    }
+  ]
+};
+    const tooltip = {'html': "<b>{preferred_common_name}</b><br>scientific name: {scientific_name}<br><img src='{Image link}' width='200' height='150'><br>source: {citation}", 'style': {'backgroundColor': 'lightgrey', 'color': 'black', 'opacity': '80%'}};
+    const customLibraries = null;
+    const configuration = null;
+
+    const deckInstance = createDeck({
+                  container,
+      jsonInput,
+      tooltip,
+      customLibraries,
+      configuration,
+          });
+
+  </script>
+</html>
