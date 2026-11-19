@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Rakali in Greater Melbourne</title>
+    </head>
+    <body>
+        <div
+            class="container ps-typography ps-display--flex ps-justify-content--center"
+            data-component="CodeBlock"
+        >
+            <style>
+
+            html,
+                body {
+                    height: 100%;
+                    margin: 0;
+                    padding: 0;
+                }
+
+            html body #custom-block-3 {
+                height: 100vh;
+                display: flex;
+                flex-direction: column;             
+                .full-width {
+                box-sizing: border-box;
+                width: 100%;
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                overflow: hidden;
+                min-height: 0;
+                }
+                .tab-radio {
+                position: absolute;
+                width: 1px;
+                height: 1px;
+                opacity: 0;
+                pointer-events: none;
+                }
+                .button-bar {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+                background: #000;
+                padding: 0.5rem;
+                align-items: center;
+                flex-shrink: 0;
+                }
+                .button-bar label {
+                background: #111;
+                color: #fff;
+                border: 1px solid #333;
+                padding: 0.5rem 0.75rem;
+                cursor: pointer;
+                border-radius: 4px;
+                font-size: 0.95rem;
+                user-select: none;
+                }
+                .service1 {
+                /* display: none; */
+                width: 100%;
+                height: 100%;
+                box-sizing: border-box;
+                flex: 1;
+                }
+                .service1 iframe {
+                width: 100%;
+                height: 100%;
+                display: block;
+                border: 0;
+                box-sizing: border-box;
+                }
+                .panel-header {
+                background: #abc1a7;
+                color: #444a40;
+                padding: 1rem;
+                text-align: center;
+                }
+                .panel-header h1,
+                h2 {
+                margin: 0;
+                }
+                .panel-header h1 {
+                font-size: 1.75rem;
+                }
+                .panel-header h2 {
+                font-size: 0.95rem;
+                margin-top: 0.5rem;
+                }
+                .panel-header p {
+                font-size: 0.85rem;
+                }
+                .panel-footer {
+                text-align: left;
+                font-size: 0.8rem;
+                line-height: 1.3; /* CHANGED: tightens spacing between the footer lines */
+                background: #abc1a7;
+                color: #444a40;
+                padding: 0.1rem 1rem;
+                margin: 0;
+                box-sizing: border-box;
+                flex-shrink: 0;
+                }
+                .legend-row {
+                display: flex;
+                justify-content: center;
+                gap: 8px;
+                margin-top: 0.5rem;
+                align-items: center;
+                } /* wrapper for iframe + watermark */
+                .iframe-wrap {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                overflow: visible;
+                } /* ensure iframe fills wrapper and stays behind the watermark */
+                .iframe-wrap iframe {
+                display: block;
+                width: 100%;
+                height: 100%;
+                border: 0;
+                position: relative;
+                z-index: 0;
+                min-height: 50vh;
+                max-height: 960px;
+                } /* watermark container in top-right; does not capture pointer events */
+                .iframe-wrap .iframe-watermark {
+                position: absolute;
+                top: 12px;
+                right: 5px;
+                z-index: 20;
+                text-align: right;
+                pointer-events: none; /* allow map interaction to pass through */
+                } /* large watermark — adjust width as desired; image already opaque */
+                .iframe-wrap .iframe-watermark img {
+                display: inline-block;
+                width: 20%;
+                max-width: 100%;
+                height: auto;
+                opacity: 1; /* keep full opacity since image is already opaqued */
+                }
+            }
+            </style>
+            <article id="custom-block-3" class="page-wrapper">
+            <div class="full-width">
+                <div id="rakali_points" class="service1">
+                <div class="panel-header">
+                    <h1 id="rakali-spotted-around-gr-m5ld">
+                    Rakali spotted around Greater Melbourne
+                    </h1>
+                    <div class="legend-row" aria-hidden="true">
+                    <span></span>
+                    <img
+                        src="https://unimelbmdap.github.io/biodiversity_maps/assets/rakali_possum_maroon_100.png"
+                        alt="icon made from image of a rakali with a maroon border"
+                        style="
+                        width: 60px;
+                        height: 18px;
+                        object-fit: contain;
+                        display: inline-block;
+                        "
+                    />
+                    <span style="font-size: 0.9rem">Rakali sighting recorded</span>
+                    </div>
+                </div>
+                <div class="iframe-wrap">
+                    <iframe
+                    src="https://unimelbmdap.github.io/biodiversity_maps/rakali/rakali_icon_map_maroon.html"
+                    loading="lazy"
+                    title="Rakali Points"
+                    ></iframe>
+                    <span class="iframe-watermark" aria-hidden="true">
+                    <img
+                        src="https://unimelbmdap.github.io/biodiversity_maps/assets/uom_logo_no_background.png"
+                        alt="University of Melbourne Logo"
+                    />
+                    </span>
+                </div>
+                </div>
+            </div>
+            <div id="data_source" class="panel-footer" role="contentinfo">
+                Data: Atlas of Living Australia<br />Researchers: Dr Kylie Soanes and
+                Dr Anna Edwards <br />Map: Dr Emily Fitzgerald, Melbourne Data
+                Analytics Platform (MDAP)
+            </div>
+            </article>
+        </div>
+</body>
+</html>
